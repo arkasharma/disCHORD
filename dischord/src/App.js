@@ -1,5 +1,8 @@
 import "./App.css";
 import { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+//import components
+import LoginPage from "./loginPage";
 
 function App() {
   // create stateVariables
@@ -8,29 +11,27 @@ function App() {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="App">
-      <h1>DisCHORD</h1>
-      {/*creating login page with username and password fields*/}
-      <div className="login">
-        <label htmlFor="username"> Username </label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password"> Password</label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input type="button" name="Submit" id="Submit" value="SUBMIT" />
+    //Wrap everything in router component so that everything has access
+    <Router>
+      <div className="App">
+        {/* Route to home page, move content to home function */}
+        <Switch>
+          <Route exact path="/">
+            {/* Render LoginPage and pass down state props */}
+            <LoginPage
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+            />
+          </Route>
+          {/*Add route to the link to signup */}
+          <Route exact path="/signup">
+            <h2> Signup Page </h2>
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 }
 
