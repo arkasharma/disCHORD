@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   return (
     <>
@@ -23,7 +25,8 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         <input type="button" name="Submit" id="Submit" value="SUBMIT" />
         <br />
         <span>
-          Need an account? <a href="/signup">Signup </a>
+          {/* Router Link instead of rerouting using a tag, react router will intercept the url to where we are going to */}
+          Need an account? <Link to="/signup">Signup </Link>
         </span>
       </div>
     </>
