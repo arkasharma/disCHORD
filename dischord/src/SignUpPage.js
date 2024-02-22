@@ -11,8 +11,22 @@ const SignUpPage = () => {
   };
   const handleSub = (e) => {
     const user = { ...formData };
-    e.preventDefault();
     // Handle form submission logic here
+    //if the form does not have all the required information just return
+    //don't save the form
+    e.preventDefault();
+    if (formData.email === "") {
+      alert("Please enter an email");
+      return;
+    }
+    if (formData.username === "") {
+      alert("Please enter a username");
+      return;
+    }
+    if (formData.password === "") {
+      alert("Please enter a password");
+      return;
+    }
     //ADD: submit form data to JSON database
     fetch("http://localhost:8000/validLogins", {
       method: "POST",
