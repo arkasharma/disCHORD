@@ -10,10 +10,15 @@ const SignUpPage = () => {
     setFormData({ ...formData, [name]: value });
   };
   const handleSub = (e) => {
+    const user = { ...formData };
     e.preventDefault();
     // Handle form submission logic here
-    console.log("Form submitted:", formData);
     //ADD: submit form data to JSON database
+    fetch("http://localhost:8000/validLogins", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    }).then(() => console.log("new Blog Added"));
   };
   return (
     <>

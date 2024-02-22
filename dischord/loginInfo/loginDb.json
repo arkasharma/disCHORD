@@ -1,0 +1,15 @@
+{
+  "validLogins": [
+    {
+      "username": "Mateus",
+      "password": "passwad",
+      "id": "94f4"
+    },
+    {
+      "id": "5c7c",
+      "username": "meep",
+      "password": "womp womp",
+      "email": "mesats"
+    }
+  ]
+}
