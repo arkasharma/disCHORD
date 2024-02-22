@@ -68,7 +68,8 @@ h1 {
   padding-bottom: 35px;
 }
 
-input[type="button"] {
+input[type="button"],
+#submit {
   border: 1px solid rgb(0, 102, 255);
   height: 34px;
   outline: none;

@@ -36,7 +36,9 @@ const SignUpPage = () => {
           id="password"
           onChange={handleChange}
         />
-        <button type="submit">SUBMIT</button>
+        <button id="submit" type="submit">
+          SUBMIT
+        </button>
         <br />
       </form>
     </>
