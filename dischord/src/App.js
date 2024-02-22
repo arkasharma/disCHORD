@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import components
 import LoginPage from "./loginPage";
+import ChatPage from "./ChatPage";
 
 function App() {
   // create stateVariables
@@ -28,6 +29,10 @@ function App() {
           {/*Add route to the link to signup */}
           <Route exact path="/signup">
             <h2> Signup Page </h2>
+          </Route>
+          <Route exact path="/chat">
+            {/*Chat page route */}
+            <ChatPage />
           </Route>
         </Switch>
       </div>
