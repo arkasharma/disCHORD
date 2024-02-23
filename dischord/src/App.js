@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./loginPage";
 import ChatPage from "./ChatPage";
 import SignUpPage from "./SignUpPage";
+import SignedUp from "./signedUp";
 
 function App() {
   // create stateVariables
@@ -33,7 +34,11 @@ function App() {
           </Route>
           {/*Chat page route */}
           <Route exact path="/chat">
-            <ChatPage />
+            <ChatPage username={username} password={password} />
+          </Route>
+          {/* Page after signed up with Dischord */}
+          <Route exact path="/signedUp">
+            <SignedUp />
           </Route>
         </Switch>
       </div>

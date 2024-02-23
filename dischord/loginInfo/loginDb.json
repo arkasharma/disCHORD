@@ -10,6 +10,42 @@
       "username": "meep",
       "password": "womp womp",
       "email": "mesats"
+    },
+    {
+      "id": "60f8",
+      "username": "asdf",
+      "password": "asdf",
+      "email": "beeps"
+    },
+    {
+      "id": "cb7b",
+      "username": "asdf",
+      "password": "adsf",
+      "email": "asdf"
+    },
+    {
+      "id": "d97d",
+      "username": "asdf",
+      "password": "adsf",
+      "email": "asdf"
+    },
+    {
+      "id": "d53e",
+      "username": "asdf",
+      "password": "adsf",
+      "email": "asdf"
+    },
+    {
+      "id": "a8e4",
+      "username": "asdf",
+      "password": "asdf",
+      "email": "asdf"
+    },
+    {
+      "id": "8d8e",
+      "username": "asdf",
+      "password": "asdfasdf",
+      "email": "asdf"
     }
   ]
 }

@@ -1,16 +1,23 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 const SignUpPage = () => {
+  // init state variable
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     email: "",
   });
+  //init router hook to change navigation and direction
+  const history = useHistory();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
   const handleSub = (e) => {
     const user = { ...formData };
+    //ADD: hashing for the password
+
     // Handle form submission logic here
     //if the form does not have all the required information just return
     //don't save the form
@@ -27,12 +34,13 @@ const SignUpPage = () => {
       alert("Please enter a password");
       return;
     }
-    //ADD: submit form data to JSON database
+    //submit form data to JSON database
+    //IMPORANT will need to change fetch address location
     fetch("http://localhost:8000/validLogins", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
-    }).then(() => console.log("new Blog Added"));
+    }).then(() => history.push("/signedUp"));
   };
   return (
     <>
