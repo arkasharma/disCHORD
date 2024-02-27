@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   const history = useHistory();
-  let usernames;
-  let passwords;
+  let loggedIn = false;
 
   const fetchData = () => {
     return fetch("http://localhost:8000/validLogins")
@@ -16,9 +15,13 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         return response.json();
       })
       .then((jsonData) => {
-        usernames = jsonData.map((item) => item.username);
-        passwords = jsonData.map((item) => item.password);
-        return { usernames, passwords };
+        // usernames = jsonData.map((item) => item.username);
+        // passwords = jsonData.map((item) => item.password);
+        //grab only entry with that specific username
+        const userEntries = jsonData.filter(
+          (item) => item.username === username
+        );
+        return { userEntries };
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -33,8 +36,18 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
       .then((data) => {
         //data contains the information from the json server
         console.log(data);
-        // verify if the user has logged in
-        // check if the username inputted matches the one of usernames in the database
+        //check if the password matches
+        // COULD CHANGE: could change based on later specifications
+        // Allows for multiple entries of the same username, but should work in either case
+        const matchingUsernames = data.userEntries;
+        for (let i = 0; i < matchingUsernames.length; i++) {
+          if (matchingUsernames[i].password === password) {
+            loggedIn = true;
+            //set cookie so that user can be redirected back to the chat page if not logged in
+            Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+          }
+        }
+
         // if (usernames.find((e) => e === username)) {
         //   //alert("Here!");
         //   console.log("sucess");
