@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import qs from 'qs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 // npm install dotenv axios
@@ -10,6 +10,8 @@ const SpotifySearch = () => {
     const [artistName, setArtistName] = useState('');
     const [trackName, setTrackName] = useState('');
     const [songs, setSongs] = useState([]);
+
+    const previewTrack = useRef(null);
 
     // get through spotify dev account. Located in .env file
     const clientId = "5771f0e8e76d437fab9f53ab1013b52f";
@@ -55,7 +57,21 @@ const SpotifySearch = () => {
         return () => clearTimeout(delayDebounceFn);
     }, [artistName, trackName, token]); // Depend on token as well to ensure we have it before searching
 
+    const playPreview = (previewUrl) => {
+        if (previewTrack.current) {
+            previewTrack.current.pause();
+        }
 
+        previewTrack.current = new Audio(previewUrl);
+        previewTrack.current.volume = 0.1;
+        previewTrack.current.play();
+    };
+
+    const pausePreview = () => {
+        if (previewTrack.current) {
+            previewTrack.current.pause();
+        }
+    };
 
     return (
         <div>
@@ -71,13 +87,23 @@ const SpotifySearch = () => {
                 value={trackName}
                 onChange={e => setTrackName(e.target.value)}
             />
-            <button onClick={searchSongs}>Search</button>
             <div>
-                {songs.map(song => (
-                    <div key={song.id}>
-                        <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                            {song.name} by {song.artists.map(artist => artist.name).join(", ")} link: {song.external_urls.spotify}
-                        </a>
+                {songs.map((song) => (
+                    <div key={song.id} style={{ marginBottom: '20px' }}>
+                        {song.album.images.length > 0 && (
+                            <img src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
+                        )}
+                        <div>
+                            <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                {song.name} by {song.artists.map((artist) => artist.name).join(", ")}
+                            </a>
+                            {song.preview_url && (
+                                <>
+                                    <button onClick={() => playPreview(song.preview_url)}>Play</button>
+                                    <button onClick={() => pausePreview()}>Pause</button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 ))}
             </div>
