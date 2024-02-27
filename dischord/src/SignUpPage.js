@@ -69,7 +69,7 @@ const SignUpPage = () => {
         <br />
         <span>
           {/* Router Link instead of rerouting using a tag, react router will intercept the url to where we are going to */}
-          Go back to Login Page? <Link to="/">Login Page</Link>
+          Go back to Login Page? <Link to="/login">Login Page</Link>
         </span>
       </form>
     </>

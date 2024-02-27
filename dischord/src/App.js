@@ -6,6 +6,7 @@ import LoginPage from "./loginPage";
 import ChatPage from "./ChatPage";
 import SignUpPage from "./SignUpPage";
 import SignedUp from "./signedUp";
+import NotLoggedIn from "./NotLoggedIn";
 
 function App() {
   // create stateVariables
@@ -19,7 +20,7 @@ function App() {
       <div className="App">
         {/* Route to home page, move content to home function */}
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/login">
             {/* Render LoginPage and pass down state props */}
             <LoginPage
               username={username}
@@ -33,12 +34,15 @@ function App() {
             <SignUpPage />
           </Route>
           {/*Chat page route */}
-          <Route exact path="/chat">
+          <Route exact path="/">
             <ChatPage username={username} password={password} />
           </Route>
           {/* Page after signed up with Dischord */}
           <Route exact path="/signedUp">
             <SignedUp />
+          </Route>
+          <Route exact path="/notLoggedIn">
+            <NotLoggedIn />
           </Route>
         </Switch>
       </div>

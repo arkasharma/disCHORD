@@ -49,7 +49,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
             Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
             setIsLoggedIn("true");
             //console.log(isLoggedIn);
-            history.push("/chat");
+            history.push("/");
           }
         }
         if (loggedIn !== true) {

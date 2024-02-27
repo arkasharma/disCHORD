@@ -3,7 +3,7 @@ const SignedUp = () => {
   return (
     <>
       <h2> You have now signed up for DisCHORD!</h2>
-      <Link to="/"> Click here to Login!</Link>
+      <Link to="/login"> Click here to Login!</Link>
     </>
   );
 };
