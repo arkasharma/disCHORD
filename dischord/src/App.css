@@ -97,3 +97,9 @@ input[type="button"],
   justify-content: center;
   padding-bottom: 35px;
 }
+
+#failedLogin {
+  margin-top: -10px;
+  padding-top: 2px;
+  margin-bottom: 10px;
+}

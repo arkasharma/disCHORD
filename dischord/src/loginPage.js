@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
+
 import Cookies from "js-cookie";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   const history = useHistory();
   let loggedIn = false;
-
+  const [isLoggedIn, setIsLoggedIn] = useState("init");
   const fetchData = () => {
     return fetch("http://localhost:8000/validLogins")
       .then((response) => {
@@ -42,12 +44,22 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         const matchingUsernames = data.userEntries;
         for (let i = 0; i < matchingUsernames.length; i++) {
           if (matchingUsernames[i].password === password) {
-            loggedIn = true;
             //set cookie so that user can be redirected back to the chat page if not logged in
+            loggedIn = true;
             Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+            setIsLoggedIn("true");
+            //console.log(isLoggedIn);
+            history.push("/chat");
           }
         }
-
+        if (loggedIn !== true) {
+          //isLoggedIn = false;
+          setIsLoggedIn("false");
+          loggedIn = false;
+          //console.log(isLoggedIn);
+          Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+          setPassword("");
+        }
         // if (usernames.find((e) => e === username)) {
         //   //alert("Here!");
         //   console.log("sucess");
@@ -74,12 +86,14 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         />
         <label htmlFor="password"> Password</label>
         <input
-          type="text"
+          type="password"
           name="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {/* Conditionally render whether you have failed your login */}
+        {isLoggedIn === "false" && <span id="failedLogin"> Failed Login.</span>}
         <button id="submit" type="submit">
           SUBMIT
         </button>

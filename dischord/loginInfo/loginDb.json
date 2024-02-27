@@ -46,6 +46,18 @@
       "username": "asdf",
       "password": "asdfasdf",
       "email": "asdf"
+    },
+    {
+      "id": "e8f9",
+      "username": "mateus",
+      "password": "lucas",
+      "email": "davianna@gmail"
+    },
+    {
+      "id": "95e2",
+      "username": "davianna",
+      "password": "pucas5",
+      "email": "mateusb"
     }
   ]
 }

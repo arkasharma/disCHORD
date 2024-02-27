@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const SignUpPage = () => {
   // init state variable
@@ -67,6 +67,10 @@ const SignUpPage = () => {
           SUBMIT
         </button>
         <br />
+        <span>
+          {/* Router Link instead of rerouting using a tag, react router will intercept the url to where we are going to */}
+          Go back to Login Page? <Link to="/">Login Page</Link>
+        </span>
       </form>
     </>
   );
