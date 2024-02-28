@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Sidebar from './ChatComponents/Sidebar.js'
+import Chat from './ChatComponents/Chat.js'
+
 
 //chat page is set to be the home page "/"
 const ChatPage = () => {
@@ -18,8 +21,16 @@ const ChatPage = () => {
   if (cookieDict["loggedIn"] !== "true") {
     history.push("/notLoggedIn");
   }
+
   //rendered components of the chat page
-  return <h2>Hello World!</h2>;
+  return (
+  <div className="home">
+    <div className="container">
+      <Sidebar/>
+      <Chat/>
+    </div>
+  </div>
+  )
 };
 
 export default ChatPage;
