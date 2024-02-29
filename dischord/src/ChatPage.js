@@ -8,9 +8,12 @@ import SpotifySearch from "./SpotifySearch.js";
 const ChatPage = () => {
   //loggedIn is stored in the cookies and we need to check if it is true that the user is logged in
   //extract the cookie
+  //useHistory hook for accessing the history object
   const history = useHistory();
+  //extracting and parsing cookies to check user login status
   const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
   let cookieDict = {};
+  //loop through each cookie to create a dictionary
   for (let i = 0; i < cookies.length; i++) {
     const parts = cookies[i].split("=");
     let name = parts[0];
