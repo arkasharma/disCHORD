@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-
 import Cookies from "js-cookie";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
@@ -21,7 +20,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         // passwords = jsonData.map((item) => item.password);
         //grab only entry with that specific username
         const userEntries = jsonData.filter(
-          (item) => item.username === username
+          (item) => item.username === username,
         );
         return { userEntries };
       })

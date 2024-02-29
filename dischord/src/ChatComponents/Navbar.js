@@ -1,20 +1,20 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
-
+import Cookies from "js-cookie";
 const Navbar = () => {
-    const logout = () => {
+  const logout = () => {
+    Cookies.set("loggedIn", false, { path: "/" });
+  };
 
-    }
-  
-    return (
-        <div className='navbar'>
-            <span className='logo'>DisCHORD</span>
-            <div className="user">
-                <span>UserName</span>
-                <Link to="/notLoggedIn">Logout</Link>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="navbar">
+      <span className="logo">DisCHORD</span>
+      <div className="user">
+        <span>UserName</span>
+        <div onClick={logout}>Logout</div>
+      </div>
+    </div>
+  );
+};
 
-export default Navbar
+export default Navbar;
