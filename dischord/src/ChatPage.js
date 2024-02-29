@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Sidebar from './ChatComponents/Sidebar.js'
-import Chat from './ChatComponents/Chat.js'
-
+import Sidebar from "./ChatComponents/Sidebar.js";
+import Chat from "./ChatComponents/Chat.js";
+import SpotifySearch from "./SpotifySearch.js";
 
 //chat page is set to be the home page "/"
 const ChatPage = () => {
@@ -24,13 +24,14 @@ const ChatPage = () => {
 
   //rendered components of the chat page
   return (
-  <div className="home">
-    <div className="container">
-      <Sidebar/>
-      <Chat/>
+    <div className="home">
+      <div className="container">
+        <Sidebar />
+        <Chat />
+        <SpotifySearch />
+      </div>
     </div>
-  </div>
-  )
+  );
 };
 
 export default ChatPage;
