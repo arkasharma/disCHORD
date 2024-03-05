@@ -2,7 +2,14 @@ import React from 'react'
 
 const Message = () => {
     return (
-        <div>Message</div>
+        <div className="message owner">
+            <div className="messageInfo">
+                <span>Just now</span>
+            </div>
+            <div className="messageContent">
+                <p>hello</p>
+            </div>
+        </div>
     )
 }
 

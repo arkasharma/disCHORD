@@ -6,11 +6,13 @@ const SearchBar = () => {
             <div className="searchForm">
                 <input type="text" placeholder="Search for user"/>
             </div>
+            <div className='chats'>
             <div className="userChat">
                 <div className="userChatInfo">
-                    <span>otherUserName</span>
+                    <span>Name</span>
                 </div>
-            </div>
+            </div> 
+        </div>
         </div>
     )
 }
