@@ -132,14 +132,18 @@ input[type="button"],
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-.home{
-  background-color: rgb(0, 102, 255);
+.clickable {
+  cursor: pointer;
+}
+
+.home {
+  background-color: #fce7f3;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .container{
+  .container {
     border: 1px solid rgb(27, 54, 96);
     border-radius: 10px;
     width: 65%;
@@ -147,7 +151,7 @@ input[type="button"],
     display: flex;
     overflow: hidden;
 
-    .sidebar{
+    .sidebar {
       flex: 1;
       border-right: 1px solid rgb(28, 37, 97);
       background-color: rgb(83, 99, 205);
@@ -155,7 +159,7 @@ input[type="button"],
       .navbar {
         display: flex;
         align-items: center;
-        background-color: rgb(135, 144, 207) ;
+        background-color: rgb(135, 144, 207);
         height: 50px;
         padding: 10px;
         justify-content: space-between;
@@ -164,8 +168,8 @@ input[type="button"],
           font-size: 200%;
           color: rgb(0, 102, 255);
         }
-        
-        .user{
+
+        .user {
           display: flex;
           gap: 10px;
 
@@ -180,9 +184,9 @@ input[type="button"],
           }
           */
 
-          button{
+          button {
             background-color: rgb(83, 99, 205);
-            color:  white;
+            color: white;
             font-size: 10px;
             border: none;
             cursor: pointer;
@@ -195,7 +199,7 @@ input[type="button"],
 
         .searchForm {
           padding: 10px;
-          input{
+          input {
             background-color: transparent;
             border-color: rgb(52, 52, 179);
             color: white;
@@ -214,15 +218,15 @@ input[type="button"],
           color: white;
           cursor: pointer;
 
-          img {}
+          img {
+          }
         }
       }
-
     }
 
-    .chat{
-      flex: 2;     /* chat bar should be double the size of the sidebar */
-      background-color: rgb(52, 52, 179)
+    .chat {
+      flex: 2; /* chat bar should be double the size of the sidebar */
+      background-color: rgb(52, 52, 179);
     }
   }
 }

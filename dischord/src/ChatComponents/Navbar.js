@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 const Navbar = () => {
+  const history = useHistory();
   const logout = () => {
     Cookies.set("loggedIn", false, { path: "/" });
+    history.push("/login");
   };
 
   return (
@@ -11,7 +13,10 @@ const Navbar = () => {
       <span className="logo">DisCHORD</span>
       <div className="user">
         <span>UserName</span>
-        <div onClick={logout}>Logout</div>
+        <div onClick={logout}>
+          {/* make clickable element*/}
+          <span class="clickable">Logout</span>
+        </div>
       </div>
     </div>
   );
