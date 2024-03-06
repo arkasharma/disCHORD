@@ -69,15 +69,15 @@ const SignUpPage = () => {
       if (existingUsernames.userEntries.length > 0) {
         alert("Username already exists, choose another username");
         return;
+      } else {
+        //submit form data to JSON database
+        //IMPORTANT will need to change fetch address location
+        fetch("http://localhost:8000/validLogins", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        }).then(() => history.push("/signedUp"));
       }
-
-      //submit form data to JSON database
-      //IMPORTANT will need to change fetch address location
-      fetch("http://localhost:8000/validLogins", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      }).then(() => history.push("/signedUp"));
     });
   };
   return (
