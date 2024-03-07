@@ -2,18 +2,20 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const history = useHistory();
   const logout = () => {
     Cookies.set("loggedIn", false, { path: "/" });
     history.push("/login");
   };
 
+  const { username, password } = props;
+
   return (
     <div className="navbar">
       <span className="logo">DisCHORD</span>
       <div className="user">
-        <span>UserName</span>
+        <span>{username}</span>
         <div onClick={logout}>
           {/* make clickable element*/}
           <span class="clickable">Logout</span>

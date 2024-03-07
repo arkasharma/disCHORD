@@ -32,6 +32,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
 
   const checkValidation = (e) => {
     e.preventDefault();
+
     // call to fetch the data and then must wait for the return
     fetchData()
       .then((data) => {
@@ -59,6 +60,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
           Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
           setPassword("");
         }
+
         // if (usernames.find((e) => e === username)) {
         //   //alert("Here!");
         //   console.log("sucess");

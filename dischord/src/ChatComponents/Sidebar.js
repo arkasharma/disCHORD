@@ -3,10 +3,12 @@ import Navbar from './Navbar.js'
 import SearchBar from './SearchBar.js'
 import Chats from './Chats.js'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+    const { username, password } = props;
+
     return (
         <div className='sidebar'>
-            <Navbar/>
+            <Navbar username={username} password={password}/>
             <SearchBar/>
             <Chats/>
         </div>

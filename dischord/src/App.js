@@ -8,6 +8,7 @@ import SignUpPage from "./SignUpPage";
 import SignedUp from "./signedUp";
 import NotLoggedIn from "./NotLoggedIn";
 import SpotifySearch from "./SpotifySearch";
+import { setDoc } from "firebase/firestore";
 
 function App() {
   // create stateVariables
@@ -53,5 +54,19 @@ function App() {
     </Router>
   );
 }
+
+/*
+const register = () => {
+  await updateProfile (res.user, {
+    displayName,
+  });
+
+  await setDoc(doc(db, "users", res.user.uid), {
+    id: res.user.id,
+    displayName,
+    email,
+  });
+}
+*/
 
 export default App;

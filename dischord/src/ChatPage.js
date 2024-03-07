@@ -5,7 +5,9 @@ import Chat from "./ChatComponents/Chat.js";
 import SpotifySearch from "./SpotifySearch.js";
 
 //chat page is set to be the home page "/"
-const ChatPage = () => {
+const ChatPage = (props) => {
+  const { username, password } = props;
+
   //loggedIn is stored in the cookies and we need to check if it is true that the user is logged in
   //extract the cookie
   //useHistory hook for accessing the history object
@@ -29,7 +31,7 @@ const ChatPage = () => {
   return (
     <div className="home">
       <div className="container">
-        <Sidebar />
+        <Sidebar username={username} password={password}/>
         <Chat />
         <SpotifySearch />
       </div>
