@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     // Execute syncLoginDb when the component mounts
     syncLoginDb();
-  }, []); // Empty dependency array ensures it only runs once when the component mounts
+  }, []);
 
   return (
     //Wrap everything in router component so that everything has access

@@ -31,7 +31,7 @@ const ChatPage = (props) => {
   return (
     <div className="home">
       <div className="container">
-        <Sidebar username={username} password={password}/>
+        <Sidebar username={username} />
         <Chat />
         <SpotifySearch />
       </div>

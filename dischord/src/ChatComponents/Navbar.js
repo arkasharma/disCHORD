@@ -2,14 +2,14 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Navbar = (props) => {
+const Navbar = (prop) => {
   const history = useHistory();
   const logout = () => {
     Cookies.set("loggedIn", false, { path: "/" });
     history.push("/login");
   };
 
-  const { username, password } = props;
+  const { username } = prop;
 
   return (
     <div className="navbar">
