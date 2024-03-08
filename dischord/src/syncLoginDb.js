@@ -1,5 +1,5 @@
 import { db } from "./firebase.js"
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import loginDb from "./loginDb.json"; 
 
 // Loop through the validLogins array and upload each user to Firestore
@@ -16,7 +16,12 @@ export async function syncLoginDb() {
 
             // Set the userChats document data in Firestore
             const userChatDocRef = doc(db, "userChats", user.id);
-            await setDoc(userChatDocRef, {});
+            const userChatDocSnapshot = await getDoc(userChatDocRef);
+            
+            // If the userChat document doesn't exist, initialize it in the userChats collection
+            if (!userChatDocSnapshot.exists()) {
+                await setDoc(userChatDocRef, {});
+            }
 
             console.log(`User ${user.id} uploaded to Firestore successfully`);
         } 

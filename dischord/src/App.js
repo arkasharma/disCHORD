@@ -42,7 +42,7 @@ function App() {
           </Route>
           {/*Chat page route */}
           <Route exact path="/">
-            <ChatPage username={username} password={password} />
+            <ChatPage username={username} />
           </Route>
           {/* Page after signed up with Dischord */}
           <Route exact path="/signedUp">

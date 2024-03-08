@@ -16,7 +16,9 @@ const Chats = (prop) => {
             currentUserID = user.id;
         }
     });
-    
+    console.log(username);
+    console.log(currentUserID);
+
     useEffect(() => {
        const getChats = () => {
         // listen to make changes real-time

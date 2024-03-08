@@ -70,7 +70,7 @@ const SearchBar = (prop) => {
                 await updateDoc(doc(db, "userChats", user.id), {
                     [combinedID+".userInfo"]: {
                         id:currentUserID,
-                        username:{username}
+                        username:username
                     },
                     [combinedID+".date"]:serverTimestamp()
                 });
