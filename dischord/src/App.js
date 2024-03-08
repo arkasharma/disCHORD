@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import components
 import LoginPage from "./loginPage";
@@ -8,13 +8,18 @@ import SignUpPage from "./SignUpPage";
 import SignedUp from "./signedUp";
 import NotLoggedIn from "./NotLoggedIn";
 import SpotifySearch from "./SpotifySearch";
-import { setDoc } from "firebase/firestore";
+import { syncLoginDb } from "./syncLoginDb.js";
 
 function App() {
   // create stateVariables
   // value of the variables will update everytime a keystroke is entired into the box
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    // Execute syncLoginDb when the component mounts
+    syncLoginDb();
+  }, []); // Empty dependency array ensures it only runs once when the component mounts
 
   return (
     //Wrap everything in router component so that everything has access
@@ -54,19 +59,5 @@ function App() {
     </Router>
   );
 }
-
-/*
-const register = () => {
-  await updateProfile (res.user, {
-    displayName,
-  });
-
-  await setDoc(doc(db, "users", res.user.uid), {
-    id: res.user.id,
-    displayName,
-    email,
-  });
-}
-*/
 
 export default App;
