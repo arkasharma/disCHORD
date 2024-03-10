@@ -21,9 +21,6 @@ const Message = ({username, selectedUser, message}) => {
     return (
         <div ref={ref} >
         <div className={`message ${message.senderID === currentUserID && "owner"}`} >
-            <div className="messageInfo">
-                <span>now</span>
-            </div>
             <div className="messageContent">
                 <p>{message.text}</p>
             </div>
