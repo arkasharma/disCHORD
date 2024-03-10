@@ -86,7 +86,7 @@ const SearchBar = (prop) => {
             <div className="searchForm">
                 <input 
                 type="text" 
-                placeholder="Search for user" 
+                placeholder="Search for user to start a chat!" 
                 onKeyDown={handleKey} 
                 onChange={e=>setNewUsername(e.target.value)}
                 value={newUsername}

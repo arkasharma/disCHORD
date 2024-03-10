@@ -3,8 +3,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import {db} from "../firebase.js";
 import loginDb from "../loginDb.json";
 
-const Chats = (prop) => {
-    const { username } = prop;
+const Chats = ({ username, handleSelect }) => {
     const [chats, setChats] = useState([])
 
     // Iterate through the validLogins array to find the user with the matching username
@@ -16,8 +15,8 @@ const Chats = (prop) => {
             currentUserID = user.id;
         }
     });
-    console.log(username);
-    console.log(currentUserID);
+    console.log("chats", username);
+    console.log("chats", currentUserID);
 
     useEffect(() => {
        const getChats = () => {
@@ -34,15 +33,14 @@ const Chats = (prop) => {
         currentUserID && getChats()
     }, [currentUserID]);
 
-    console.log(Object.entries(chats));
 
     return (
         <div className='chats'>
-            {Object.entries(chats)?.map((chat) => (
-            <div className="userChat" key={chat[0]}>
+            {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
+            <div className="userChat" key={chat[0]} onClick={()=>handleSelect(chat[1]?.userInfo)}>
                 <div className="userChatInfo">
-                    <span>{chat[1].userInfo.username}</span>
-                    <p>{chat[1].userInfo.lastMessage?.text}</p>
+                    <span>{chat[1].userInfo?.username}</span>
+                    <p>{chat[1].lastMessage?.text}</p>
                 </div>
             </div> 
             ))}

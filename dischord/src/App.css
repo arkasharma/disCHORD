@@ -173,17 +173,6 @@ input[type="button"],
           display: flex;
           gap: 10px;
 
-          /*
-          if we add a profile picture during login
-          img {
-            background-color: white;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-          }
-          */
-
           button {
             background-color: rgb(83, 99, 205);
             color: white;
@@ -237,7 +226,7 @@ input[type="button"],
     }
 
     .chat {
-      flex: 2.5; /*chat bar should be double the size of the sidebar */
+      flex: 2.5;
       background-color: rgb(52, 52, 179);
 
       .chatInfo {
@@ -298,14 +287,13 @@ input[type="button"],
       .input {
         height: 50px;
         background-color: rgb(201, 208, 237);
-        padding: 20px 10px;
+        padding: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
 
         input {
-          /* width: 100%; */
           outline: none;
           font-size: 15px;
         }

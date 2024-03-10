@@ -1,15 +1,15 @@
-import React from 'react'
 import Messages from './Messages.js'
 import Input from './Input.js'
 
-const Chat = () => {
+const Chat = ({ username, selectedUser }) => {
+
     return (
         <div className='chat'>
             <div className="chatInfo">
-                <span>Name</span>
+                <span>{selectedUser?.username}</span>
             </div>
-            <Messages />
-            <Input />
+            <Messages username={username} selectedUser={selectedUser}/>
+            <Input username={username} selectedUser={selectedUser} />
         </div>
     )
 }

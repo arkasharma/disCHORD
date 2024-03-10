@@ -7,6 +7,7 @@ import SpotifySearch from "./SpotifySearch.js";
 //chat page is set to be the home page "/"
 const ChatPage = (props) => {
   const { username } = props;
+  const [selectedUser, setSelectedUser] = useState(null);
 
   //loggedIn is stored in the cookies and we need to check if it is true that the user is logged in
   //extract the cookie
@@ -31,8 +32,8 @@ const ChatPage = (props) => {
   return (
     <div className="home">
       <div className="container">
-        <Sidebar username={username} />
-        <Chat />
+        <Sidebar username={username} setSelectedUser={setSelectedUser} />
+        <Chat username={username} selectedUser={selectedUser} />
         <SpotifySearch />
       </div>
     </div>
