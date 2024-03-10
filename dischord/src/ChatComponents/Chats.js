@@ -15,8 +15,6 @@ const Chats = ({ username, handleSelect }) => {
             currentUserID = user.id;
         }
     });
-    console.log("chats", username);
-    console.log("chats", currentUserID);
 
     useEffect(() => {
        const getChats = () => {

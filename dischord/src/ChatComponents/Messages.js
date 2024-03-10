@@ -24,7 +24,7 @@ const Messages = ({ username, selectedUser }) => {
     
     useEffect(() => {
         let unSub;
-        if (combinedID){ 
+        if (combinedID && selectedUser != null){ 
             unSub = onSnapshot(doc(db,"chats", combinedID), (doc)=> {
                 doc.exists() && setMessages(doc.data().messages)
             })

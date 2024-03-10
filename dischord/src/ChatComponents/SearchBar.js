@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { collection, query, where, getDocs, getDoc } from "firebase/firestore"
 import { doc, setDoc, updateDoc } from "firebase/firestore"; 
 import { serverTimestamp } from "firebase/firestore";
-import {db} from "../firebase.js"
+import { db } from "../firebase.js"
 import loginDb from "../loginDb.json";
 
 const SearchBar = (prop) => {
@@ -31,12 +31,13 @@ const SearchBar = (prop) => {
         try {
         const querySnapshot = await getDocs(q); 
         querySnapshot.forEach((doc) => {
-         setUser(doc.data())
+        setUser(doc.data())
         });
+
         } catch(err) {
             setErr(true)
         }
-};
+    };
 
     const handleKey = e => {
         e.code === "Enter" && handleSearch();

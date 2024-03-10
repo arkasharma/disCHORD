@@ -24,7 +24,7 @@ const Input = ({username, selectedUser}) => {
     const [text, setText] = useState("")
 
     const handleSend = async () => {
-        if (combinedID) {
+        if (combinedID && selectedUser != null) {
             await updateDoc(doc(db, "chats", combinedID), {
             messages: arrayUnion({
                 id: uuid(),
@@ -33,7 +33,6 @@ const Input = ({username, selectedUser}) => {
                 date: Timestamp.now(),
             }),
             });
-        }
 
         await updateDoc(doc(db, "userChats", currentUserID), {
             [combinedID + ".lastMessage"]:{
@@ -48,7 +47,7 @@ const Input = ({username, selectedUser}) => {
             },
             [combinedID + ".date"]: serverTimestamp(),
         });
-
+    }
         setText("")
     };
 

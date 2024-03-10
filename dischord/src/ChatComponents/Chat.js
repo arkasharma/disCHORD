@@ -6,7 +6,7 @@ const Chat = ({ username, selectedUser }) => {
     return (
         <div className='chat'>
             <div className="chatInfo">
-                <span>{selectedUser?.username}</span>
+                <span>{selectedUser ? selectedUser.username : 'Select user to chat'}</span>
             </div>
             <Messages username={username} selectedUser={selectedUser}/>
             <Input username={username} selectedUser={selectedUser} />
