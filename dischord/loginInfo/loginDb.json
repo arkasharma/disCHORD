@@ -1,3 +1,16 @@
 {
-  "validLogins": []
+  "validLogins": [
+    {
+      "id": "26e4",
+      "username": "mateus",
+      "password": "mateus",
+      "email": "mateus"
+    },
+    {
+      "id": "e47f",
+      "username": "Mateus",
+      "password": "Mateus",
+      "email": "mateus@gmail.com"
+    }
+  ]
 }

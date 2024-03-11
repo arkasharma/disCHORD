@@ -6,6 +6,7 @@ const Navbar = (prop) => {
   const history = useHistory();
   const logout = () => {
     Cookies.set("loggedIn", false, { path: "/" });
+    Cookies.set("username", false, { path: "/" });
     history.push("/login");
   };
 
