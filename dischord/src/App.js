@@ -7,7 +7,7 @@ import ChatPage from "./ChatPage";
 import SignUpPage from "./SignUpPage";
 import SignedUp from "./signedUp";
 import NotLoggedIn from "./NotLoggedIn";
-import SpotifySearch from "./SpotifySearch";
+import SpotifySearchVerify from "./SpotifySearchVerify";
 
 function App() {
   // create stateVariables
@@ -45,8 +45,8 @@ function App() {
           <Route exact path="/notLoggedIn">
             <NotLoggedIn />
           </Route>
-          <Route exact path="/spotifySearch">
-            <SpotifySearch />
+          <Route exact path="/SpotifySearchVerify">
+            <SpotifySearchVerify />
           </Route>
         </Switch>
       </div>

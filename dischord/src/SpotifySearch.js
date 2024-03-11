@@ -4,18 +4,16 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 // npm install dotenv axios
+// Json error format: {'error': 'invalid_client', 'error_description': 'Invalid client secret'}
+// {'error': 'invalid_client', 'error_description': 'Invalid client'}
 
-const SpotifySearch = () => {
+const SpotifySearch = ({ artistName, trackName, clientId, clientSecret}) => {
     const [token, setToken] = useState('');
-    const [artistName, setArtistName] = useState('');
-    const [trackName, setTrackName] = useState('');
     const [songs, setSongs] = useState([]);
+    const [error, setError] = useState('');
+    const [errorDes, setErrorDes] = useState('');
 
     const previewTrack = useRef(null);
-
-    // get through spotify dev account. Located in .env file
-    const clientId = "5771f0e8e76d437fab9f53ab1013b52f";
-    const clientSecret = "ad31668a1ffb41d1bf996971d5be636b";
 
     const getAccessToken = async () => {
         const result = await axios('https://accounts.spotify.com/api/token', {
@@ -27,7 +25,15 @@ const SpotifySearch = () => {
             method: 'POST'
         });
 
-        setToken(result.data.access_token);
+        if (result.data.access_token) {
+            setToken(result.data.access_token);
+            setError('');
+            setErrorDes('');
+        }
+        else if (result.data.error) {
+            setError(result.data.error);
+            setErrorDes(result.data.error_description);
+        }
     };
 
     const searchSongs = async () => {
@@ -75,18 +81,8 @@ const SpotifySearch = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Artist Name"
-                value={artistName}
-                onChange={e => setArtistName(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Track Name"
-                value={trackName}
-                onChange={e => setTrackName(e.target.value)}
-            />
+            <div>
+            </div>            
             <div>
                 {songs.map((song) => (
                     <div key={song.id} style={{ marginBottom: '20px' }}>
