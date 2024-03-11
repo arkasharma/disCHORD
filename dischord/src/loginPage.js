@@ -52,14 +52,19 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
             history.push("/");
           }
         }
+
         if (loggedIn !== true) {
           //isLoggedIn = false;
           setIsLoggedIn("false");
           loggedIn = false;
           //console.log(isLoggedIn);
           Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
-          Cookies.set("username", username, { expires: 1 / 24, path: "/" });
+          //Cookies.set("username", username, { expires: 1 / 24, path: "/" });
           setPassword("");
+        }
+
+        if (loggedIn == true) {
+          Cookies.set("username", username, { expires: 1 / 24, path: "/" });
         }
 
         // if (usernames.find((e) => e === username)) {
