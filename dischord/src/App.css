@@ -12,7 +12,7 @@
 .login,
 .signUp {
   position: absolute;
-  top: 45%;
+  top: 47.5%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -56,7 +56,7 @@ input[type="password"] {
 }
 
 h1 {
-  font-size: 150%;
+  font-size: 250%;
   color: rgb(0, 102, 255);
   text-align: center;
   text-shadow: #282c34;
@@ -86,7 +86,7 @@ input[type="button"],
 }
 
 #title {
-  font-size: 150%;
+  font-size: 250%;
   color: rgb(0, 102, 255);
   text-align: center;
   text-shadow: #282c34;

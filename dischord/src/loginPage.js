@@ -20,7 +20,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         // passwords = jsonData.map((item) => item.password);
         //grab only entry with that specific username
         const userEntries = jsonData.filter(
-          (item) => item.username === username,
+          (item) => item.username === username
         );
         return { userEntries };
       })
@@ -58,6 +58,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
           loggedIn = false;
           //console.log(isLoggedIn);
           Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+          Cookies.set("username", username, { expires: 1 / 24, path: "/" });
           setPassword("");
         }
 
