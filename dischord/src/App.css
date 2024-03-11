@@ -12,7 +12,7 @@
 .login,
 .signUp {
   position: absolute;
-  top: 47.5%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -60,12 +60,12 @@ h1 {
   color: rgb(0, 102, 255);
   text-align: center;
   text-shadow: #282c34;
-  position: absolute;
-  top: 20%;
+  /* position: absolute; */
+  /* top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   justify-content: center;
-  padding-bottom: 35px;
+  padding-bottom: 30px;
 }
 
 input[type="button"],
@@ -86,16 +86,16 @@ input[type="button"],
 }
 
 #title {
-  font-size: 250%;
+  font-size: 200%;
   color: rgb(0, 102, 255);
   text-align: center;
   text-shadow: #282c34;
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* position: absolute;
+  top: 10%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
   justify-content: center;
-  padding-bottom: 35px;
+  padding-bottom: 30px;
 }
 
 #failedLogin {
