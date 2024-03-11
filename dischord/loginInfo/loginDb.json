@@ -11,6 +11,12 @@
       "username": "Mateus",
       "password": "Mateus",
       "email": "mateus@gmail.com"
+    },
+    {
+      "id": "fbac",
+      "username": "Arka",
+      "password": "arka",
+      "email": "arkasharma2004@gmail.com"
     }
   ]
 }
