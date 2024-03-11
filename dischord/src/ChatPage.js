@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import Sidebar from "./ChatComponents/Sidebar.js";
 import Chat from "./ChatComponents/Chat.js";
 import SpotifySearch from "./SpotifySearch.js";
 
 //chat page is set to be the home page "/"
-const ChatPage = (props) => {
-  const { username } = props;
+const ChatPage = () => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   //loggedIn is stored in the cookies and we need to check if it is true that the user is logged in
@@ -27,6 +26,8 @@ const ChatPage = (props) => {
   if (cookieDict["loggedIn"] !== "true") {
     history.push("/notLoggedIn");
   }
+
+  const username = cookieDict["username"];
 
   //rendered components of the chat page
   return (
