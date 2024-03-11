@@ -15,9 +15,9 @@ firebase_api_key = input("Enter your firebase API key: ")
 
 # combine the input with the environment variables
 # write to .env file
-with open('variables.env', 'w') as f:
-    f.write(f'SPOTIFY_API_KEY={spotify_api_key}\n')
-    f.write(f'FIREBASE_API_KEY={firebase_api_key}\n')
+with open('.env', 'w') as f:
+    f.write(f'REACT_APP_SPOTIFY_API_KEY={spotify_api_key}\n')
+    f.write(f'REACT_APP_FIREBASE_API_KEY={firebase_api_key}\n')
 
 # Start the first process
 p1 = subprocess.Popen("npm start", shell=True)
