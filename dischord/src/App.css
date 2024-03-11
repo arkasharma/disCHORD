@@ -146,8 +146,7 @@ input[type="button"],
   .container {
     border: 1px solid rgb(27, 54, 96);
     border-radius: 10px;
-    width: 65%;
-    height: 80%;
+    height: 100%;
     display: flex;
     overflow: hidden;
 
