@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAf-DA_qokjI6KThbHxob9C5AU0ZHM3oLU",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "dischord-f6bdb.firebaseapp.com",
   projectId: "dischord-f6bdb",
   storageBucket: "dischord-f6bdb.appspot.com",

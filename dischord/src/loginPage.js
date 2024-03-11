@@ -63,7 +63,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
           setPassword("");
         }
 
-        if (loggedIn == true) {
+        if (loggedIn === true) {
           Cookies.set("username", username, { expires: 1 / 24, path: "/" });
         }
 
