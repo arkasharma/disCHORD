@@ -20,10 +20,10 @@ Chat: Users can chat with one another and search for users by username.
 
 Authenticated Login: Authenticate users for secure access to the app.
 
-TODO: Add iFrame details here.
+iFrame: A fun feature where you can type in a song name, and the search will return similar songs and a confidence level.
 
 ## Installation
-TODO: Add API Key instructions here. 
+TODO: Add API Key instructions here, along with Spotify Client ID and general instructions on how to run the startup script. 
 ```
   #Clone the repository and enter it
 git clone https://github.com/arkasharma/disCHORD
