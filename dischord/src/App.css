@@ -56,16 +56,15 @@ input[type="password"] {
 }
 
 h1 {
-  font-size: 250%;
-  color: rgb(0, 102, 255);
+  font-size: 200%;
+  color: rgb(29, 47, 73);
   text-align: center;
   text-shadow: #282c34;
-  /* position: absolute; */
-  /* top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   justify-content: center;
+  display: flex;
+  align-items: center;
   padding-bottom: 30px;
+  margin-top: 20px;
 }
 
 input[type="button"],
@@ -87,15 +86,14 @@ input[type="button"],
 
 #title {
   font-size: 200%;
-  color: rgb(0, 102, 255);
+  color: rgb(29, 47, 73);
   text-align: center;
   text-shadow: #282c34;
-  /* position: absolute;
-  top: 10%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
   justify-content: center;
+  display: flex;
+  align-items: center;
   padding-bottom: 30px;
+  margin-top: 20px;
 }
 
 #failedLogin {
@@ -104,6 +102,12 @@ input[type="button"],
   margin-bottom: 10px;
 }
 
+#hom {
+  /* background-image: linear-gradient(to bottom right, #2e3639, #b8cedb); */
+  background-image: url("../public/dischord-bg.png");
+  background-size: cover;
+  height: 100vh;
+}
 #nSC {
   position: relative;
 }
@@ -137,7 +141,8 @@ input[type="button"],
 }
 
 .home {
-  background-color: #fce7f3;
+  background-color: #363a3f;
+  background-size: cover;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -146,27 +151,28 @@ input[type="button"],
   .container {
     border: 1px solid rgb(27, 54, 96);
     border-radius: 10px;
-    width: 65%;
-    height: 80%;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     overflow: hidden;
+    box-sizing: border-box;
 
     .sidebar {
       flex: 1;
       border-right: 1px solid rgb(28, 37, 97);
-      background-color: rgb(83, 99, 205);
+      background-color: #2f3135;
 
       .navbar {
         display: flex;
         align-items: center;
-        background-color: rgb(135, 144, 207);
+        background-color: rgb(107, 120, 220);
         height: 50px;
         padding: 10px;
         justify-content: space-between;
 
         .logo {
           font-size: 200%;
-          color: rgb(0, 102, 255);
+          color: rgb(21, 28, 39);
         }
 
         .user {
@@ -190,7 +196,7 @@ input[type="button"],
           padding: 10px;
           input {
             background-color: transparent;
-            border-color: rgb(52, 52, 179);
+            border-color: gray;
             color: white;
 
             &::placeholder {
@@ -227,11 +233,11 @@ input[type="button"],
 
     .chat {
       flex: 2.5;
-      background-color: rgb(52, 52, 179);
+      background-color: rgb(42, 42, 72);
 
       .chatInfo {
         height: 50px;
-        background-color: rgb(83, 99, 205);
+        background-color: #2f3135;
         display: flex;
         align-items: center;
         padding: 10px;
@@ -239,7 +245,7 @@ input[type="button"],
       }
 
       .messages {
-        background-color: rgb(135, 144, 207);
+        background-color: rgb(107, 120, 220);
         padding: 10px;
         height: calc(100% - 160px);
         overflow: scroll;
@@ -252,7 +258,7 @@ input[type="button"],
           .messageInfo {
             display: flex;
             flex-direction: column;
-            color: rgb(43, 43, 43);
+            color: white;
             font-weight: 300;
           }
 

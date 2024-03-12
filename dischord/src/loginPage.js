@@ -63,7 +63,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
           setPassword("");
         }
 
-        if (loggedIn == true) {
+        if (loggedIn === true) {
           Cookies.set("username", username, { expires: 1 / 24, path: "/" });
         }
 
@@ -79,7 +79,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
   };
 
   return (
-    <>
+    <div id="hom">
       <h1>DisCHORD</h1>
       {/*creating login page with username and password fields*/}
       <form className="login" onSubmit={checkValidation}>
@@ -110,7 +110,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
           Need an account? <Link to="/signup">Signup </Link>
         </span>
       </form>
-    </>
+    </div>
   );
 };
 

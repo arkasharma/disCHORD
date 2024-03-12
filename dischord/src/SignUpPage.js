@@ -81,7 +81,7 @@ const SignUpPage = () => {
     });
   };
   return (
-    <>
+    <div id="hom">
       <h2 id="title">Sign Up for DisCHORD!</h2>
       {/*creating login page with username and password fields*/}
       <form className="signUp" onSubmit={handleSub}>
@@ -110,7 +110,7 @@ const SignUpPage = () => {
           Go back to Login Page? <Link to="/login">Login Page</Link>
         </span>
       </form>
-    </>
+    </div>
   );
 };
 
