@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Sidebar from "./ChatComponents/Sidebar.js";
 import Chat from "./ChatComponents/Chat.js";
 import SpotifySearch from "./SpotifySearch.js";
+import IframeComponent from "./NoteWorthy.js";
 
 //chat page is set to be the home page "/"
 const ChatPage = () => {
@@ -36,11 +37,10 @@ const ChatPage = () => {
         <Sidebar username={username} setSelectedUser={setSelectedUser} />
         <Chat username={username} selectedUser={selectedUser} />
         <SpotifySearch />
+        <IframeComponent />
       </div>
     </div>
   );
 };
-
-
 
 export default ChatPage;
