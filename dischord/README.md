@@ -13,12 +13,17 @@ Contributors: Mateus Behrend, Kyle DeVeaux, Ashton Jin, Sananshi Pidyar, Arka Sh
 Here’s a brief list of disCHORD’s most notable features:
 
 Search Using Keyword: Users can search for an artist or track title, and the app will return recommendations
+
 Music: disCHORD includes a feature that links tracks to Spotify, so users can listen to the track there.
+
 Chat: Users can chat with one another and search for users by username.
+
 Authenticated Login: Authenticate users for secure access to the app.
 
-## Installation
+TODO: Add iFrame details here.
 
+## Installation
+TODO: Add API Key instructions here. 
 ```
   #Clone the repository and enter it
 git clone https://github.com/arkasharma/disCHORD
