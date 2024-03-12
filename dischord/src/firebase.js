@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 // correct API key: AIzaSyAf-DA_qokjI6KThbHxob9C5AU0ZHM3oLU
@@ -11,7 +11,7 @@ const firebaseConfig = {
   //storageBucket: "dischord-f6bdb.appspot.com",
   //messagingSenderId: "272277364746",
   appId: "1:272277364746:web:00664154f844aac9c37ff3",
-  //measurementId: "G-NVSN23EZ02"
+  //measurementId: "G-NVSN23EZ02",
 };
 
 export const app = initializeApp(firebaseConfig);
