@@ -4,6 +4,7 @@ import Sidebar from "./ChatComponents/Sidebar.js";
 import Chat from "./ChatComponents/Chat.js";
 import SpotifySearch from "./SpotifySearch.js";
 import IframeComponent from "./NoteWorthy.js";
+import "./ChatPage.css";
 
 //chat page is set to be the home page "/"
 const ChatPage = () => {
@@ -34,10 +35,12 @@ const ChatPage = () => {
   return (
     <div className="home">
       <div className="container">
-        <Sidebar username={username} setSelectedUser={setSelectedUser} />
+        <Sidebar className="sidebar" username={username} setSelectedUser={setSelectedUser} />
         <Chat username={username} selectedUser={selectedUser} />
-        <SpotifySearch />
-        <IframeComponent />
+        <div>
+          <SpotifySearch />
+          <IframeComponent />
+        </div>        
       </div>
     </div>
   );

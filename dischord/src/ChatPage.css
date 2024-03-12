@@ -1,0 +1,21 @@
+.card {
+    background-color: grey; /* Background color */
+
+    /* Padding inside the box */
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+
+    /* Outer space around the box */
+    margin-top: -15px; 
+    margin-right: 20px;
+    margin-left: 20px;
+
+    /* Adjusts the roundness of the corners */
+    border-radius: 15px;
+
+    /* Activates Flexbox */
+    display: flex; 
+    justify-content: flex-start;
+    flex-direction: row;
+}

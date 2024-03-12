@@ -45,12 +45,38 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    background-color: darkslategray;
+    background-color: #212121;
     color: white;
+    font-family: Helvetica;
 
 
     padding: 5%;
     padding-top: 5%;
     margin: 20px;
     border-radius: 15px;
+}
+
+.input-stuff {
+    overflow: auto;
+    max-width: 90%;
+    min-width: none;
+    background-color: #535353;
+    color: white;
+}
+
+.bold-text {
+    font-style: bold;
+}
+
+.spot-button {
+    background-color: #1ED760;
+    color: #121212;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 5px;
+    font-size: 15px;
+    cursor: pointer;
 }

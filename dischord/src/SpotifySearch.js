@@ -37,26 +37,27 @@ const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, Sea
 const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, setClientSecret, getAccessToken}) => {
   return (
     <div className="error-card">
-      <div> Error: {error} </div>
-      <div> Error Description: {errorDes} </div>
+      <div><strong>Error: </strong>{error}</div>
+      <div><strong>Error Description: </strong>{errorDes}</div>
       <div>
         <p> Please enter a valid Client ID and Client Secret </p>
-        <div> client ID </div>
+        <div><strong>Client ID</strong></div>
         <input
+            className="input-stuff"
             type="text"
             placeholder="Client ID"
             value={clientId}
             onChange={e => setClientId(e.target.value)}
         />
-        <div> client Secret </div>
+        <div><strong>Client Secret</strong></div>
         <input
+            className="input-stuff"
             type="text"
             placeholder="Client Secret"
             value={clientSecret}
             onChange={e => setClientSecret(e.target.value)}
         />
-        <div> retry getting access token</div>
-        <button onClick={getAccessToken}>Get Access Token</button>
+        <button className="spot-button" onClick={getAccessToken}>Retry Spotify API Keys</button>
       </div>
     </div>
   );
