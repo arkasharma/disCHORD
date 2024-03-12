@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import qs from "qs";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import "./SpotifySearch.css";
 
 // npm install dotenv axios
 
@@ -35,11 +36,9 @@ const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, Sea
 
 const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, setClientSecret, getAccessToken}) => {
   return (
-    <div>
-      <div>
-          <p> Error: {error} </p>
-          <p> Error Description: {errorDes} </p>
-      </div>
+    <div className="error-card">
+      <div> Error: {error} </div>
+      <div> Error Description: {errorDes} </div>
       <div>
         <p> Please enter a valid Client ID and Client Secret </p>
         <div> client ID </div>
@@ -73,8 +72,10 @@ const SpotifySearch = () => {
   const [error, setError] = useState('');
   const [errorDes, setErrorDes] = useState('');
 
-  const [clientId, setClientId] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_ID || '');
-  const [clientSecret, setClientSecret] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET || '');
+
+
+  const [clientId, setClientId] = useState(process.env.SPOTIFY_CLIENT_ID || "5771f0e8e76d437fab9f53ab1013b52f");
+  const [clientSecret, setClientSecret] = useState(process.env.SPOTIFY_CLIENT_SECRET || "ad31668a1ffb41d1bf996971d5be636");
 
   const previewTrack = useRef(null);
 
@@ -170,42 +171,58 @@ const SpotifySearch = () => {
 
   const SearchResults = () => {
     return (
-      <div>
-        {songs.map((song) => (
-            <div key={song.id} style={{ marginBottom: '20px' }}>
+      <>
+        <div>
+          {songs.map((song) => (
+            <div className="card" key={song.id} style={{ marginBottom: '20px' }}>
               {song.album.images.length > 0 && (
-                  <img src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
-              )}
-            <div>
-              <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                {song.name} by {song.artists.map((artist) => artist.name).join(", ")}
-              </a>
-              {song.preview_url && (
+                <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                  <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
+                </a>
+              )}     
+              <div className="card-track-artist">
+                <h2 className="track-info">{song.name}</h2>
+                <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
+              </div>
+              <div className="play-button">
+                {song.preview_url && (
                 <>
-                  <button onClick={() => {
-                    if (previewTrack.current && !previewTrack.current.paused) {
-                        pausePreview();
+                  <button className="btn btn-primary" onClick={() => {                    
+                  if (previewTrack.current && previewTrack.current.src === song.preview_url) {
+                    if (previewTrack.current.paused) {
+                    playPreview(song.preview_url);
                     } else {
-                        if (previewTrack.current) {
-                            pausePreview();
-                        }
-                        playPreview(song.preview_url);
+                    pausePreview();
                     }
-                    }}>
-                    {!previewTrack.current || previewTrack.current.paused ? 'Play' : 'Pause'}
+                  } else {
+                    if (previewTrack.current) {
+                    pausePreview();
+                    }
+                    playPreview(song.preview_url);
+                  }
+                  }}>
+                  {!previewTrack.current || previewTrack.current.paused ? 'Play' : 'Pause'}
                   </button>
                 </>
-              )}
+                )}
+              </div>              
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </>
     );
   }
 
   return (
-      <div>
+      <div class="scrollable-content">
           {isError ? <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> : <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} />}
+          <div class="card">
+            <div class="icon-container">
+                <div class="play-button">
+                  <div class="circle"></div>
+                </div>
+            </div>
+          </div>
       </div>
   );
 };

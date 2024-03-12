@@ -1,0 +1,56 @@
+.card {
+    background-color: #1ED760; /* Background color */
+
+    /* Padding inside the box */
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+
+    /* Outer space around the box */
+    margin-top: -15px; 
+    margin-right: 20px;
+    margin-left: 20px;
+
+    /* Adjusts the roundness of the corners */
+    border-radius: 15px;
+
+    /* Activates Flexbox */
+    display: flex; 
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.album-img {
+    border-radius: 10%; /* Creates a circle shape. Adjust as needed. */
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height to match the width for a perfect circle */
+    object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+}
+
+.track-info {
+    width: 400px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.scrollable-content {
+    background-color: white;
+    padding-top: 1.5%;
+    overflow: auto; /* This makes it scrollable */
+}
+
+.error-card {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: darkslategray;
+    color: white;
+
+
+    padding: 5%;
+    padding-top: 5%;
+    margin: 20px;
+    border-radius: 15px;
+}
