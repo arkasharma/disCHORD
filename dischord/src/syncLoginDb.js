@@ -22,8 +22,6 @@ export async function syncLoginDb() {
             if (!userChatDocSnapshot.exists()) {
                 await setDoc(userChatDocRef, {});
             }
-
-            console.log(`User ${user.id} uploaded to Firestore successfully`);
         } 
         
         catch (error) {
