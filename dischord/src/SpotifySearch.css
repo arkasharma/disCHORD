@@ -29,7 +29,8 @@
     }
     .card-track-artist {
         flex-grow: 1;
-        max-width: 67.5%; /* Adjusts the width of the text */
+        max-width: 67.5%;
+        overflow: hidden;
         h2 {
             margin: 0; /* Removes the default margin */
             overflow: hidden;
