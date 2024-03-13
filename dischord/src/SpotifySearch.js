@@ -74,8 +74,8 @@ const SpotifySearch = () => {
 
 
 
-  const [clientId, setClientId] = useState(process.env.SPOTIFY_CLIENT_ID || "5771f0e8e76d437fab9f53ab1013b52f");
-  const [clientSecret, setClientSecret] = useState(process.env.SPOTIFY_CLIENT_SECRET || "ad31668a1ffb41d1bf996971d5be636");
+  const [clientId, setClientId] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_ID);
+  const [clientSecret, setClientSecret] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET);
 
   const previewTrack = useRef(null);
 

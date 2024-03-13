@@ -13,14 +13,14 @@ os.system("npm install")
 spotify_client_ID = input("Enter your spotify client ID: ")
 spotify_client_secret = input("Enter your spotify client secret: ")
 
-firebase_api_key = input("Enter your firebase API key: ")
+firebase_project_id = input("Enter your firebase project ID: ")
 
 # combine the input with the environment variables
 # write to .env file
 with open('.env', 'w') as f:
     f.write(f'REACT_APP_SPOTIFY_CLIENT_ID={spotify_client_ID}\n')
     f.write(f'REACT_APP_SPOTIFY_CLIENT_SECRET={spotify_client_secret}\n')
-    f.write(f'REACT_APP_FIREBASE_API_KEY={firebase_api_key}\n')
+    f.write(f'REACT_APP_FIREBASE_PROJECT_ID={firebase_project_id}\n')
 
 # Start the first process
 p1 = subprocess.Popen("npm start", shell=True)
