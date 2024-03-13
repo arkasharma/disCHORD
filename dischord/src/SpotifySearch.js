@@ -8,20 +8,27 @@ import "./SpotifySearch.css";
 
 const SearchBar = ({ artistName, setArtistName, trackName, setTrackName }) => {
   return (
-      <>
+      <div className="search-bubble">
+        <div className="search-title">
+          Spotify Search
+        </div>
+        <div className="search-input">
           <input
-              type="text"
-              placeholder="Artist Name"
-              value={artistName}
-              onChange={e => setArtistName(e.target.value)}
+            className="input-stuff"
+            type="text"
+            placeholder="Artist Name"
+            value={artistName}
+            onChange={e => setArtistName(e.target.value)}
           />
           <input
-              type="text"
-              placeholder="Track Name"
-              value={trackName}
-              onChange={e => setTrackName(e.target.value)}
+            className="input-stuff"
+            type="text"
+            placeholder="Track Name"
+            value={trackName}
+            onChange={e => setTrackName(e.target.value)}
           />
-      </>            
+        </div>
+      </div>           
   );
 }
 
@@ -37,10 +44,10 @@ const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, Sea
 const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, setClientSecret, getAccessToken}) => {
   return (
     <div className="error-card">
-      <div><strong>Error: </strong>{error}</div>
-      <div><strong>Error Description: </strong>{errorDes}</div>
-      <div>
-        <p> Please enter a valid Client ID and Client Secret </p>
+      <p> Please enter a valid Client ID and Client Secret </p>
+      <a><strong>Error: </strong>{error}</a>
+      <a className="err-txt" ><strong>Error Description: </strong>{errorDes}</a>
+      <div>        
         <div><strong>Client ID</strong></div>
         <input
             className="input-stuff"
@@ -56,9 +63,9 @@ const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, se
             placeholder="Client Secret"
             value={clientSecret}
             onChange={e => setClientSecret(e.target.value)}
-        />
-        <button className="spot-button" onClick={getAccessToken}>Retry Spotify API Keys</button>
+        />        
       </div>
+      <button className="spot-button" onClick={getAccessToken}>Retry Spotify API Keys</button>
     </div>
   );
 }
@@ -73,14 +80,13 @@ const SpotifySearch = () => {
   const [error, setError] = useState('');
   const [errorDes, setErrorDes] = useState('');
 
-
-
   const [clientId, setClientId] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_ID);
   const [clientSecret, setClientSecret] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET);
 
   const previewTrack = useRef(null);
 
   // get through spotify dev account
+  // process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
   // valid client ID: 5771f0e8e76d437fab9f53ab1013b52f
   // valid client secret: ad31668a1ffb41d1bf996971d5be636b
 
@@ -167,21 +173,19 @@ const SpotifySearch = () => {
       }
   };
 
-    
-
   const SearchResults = () => {
     return (
       <>
         <div>
           {songs.map((song) => (
-            <div className="card" key={song.id} style={{ marginBottom: '20px' }}>
+            <div className="track-card" key={song.id} style={{ marginBottom: '20px' }}>
               {song.album.images.length > 0 && (
                 <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                  <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
+                  <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
                 </a>
               )}     
               <div className="card-track-artist">
-                <h2 className="track-info">{song.name}</h2>
+                <h2>{song.name}</h2>
                 <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
               </div>
               <div className="play-button">
@@ -216,13 +220,6 @@ const SpotifySearch = () => {
   return (
       <div class="scrollable-content">
           {isError ? <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> : <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} />}
-          <div class="card">
-            <div class="icon-container">
-                <div class="play-button">
-                  <div class="circle"></div>
-                </div>
-            </div>
-          </div>
       </div>
   );
 };

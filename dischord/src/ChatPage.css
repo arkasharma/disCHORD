@@ -1,21 +1,18 @@
-.card {
-    background-color: grey; /* Background color */
+.spot-search {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 30%;
+    overflow: none;
+    scrollbar-width: none;
+    min-height: max-content;
+}
 
-    /* Padding inside the box */
-    padding-top: 10px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-
-    /* Outer space around the box */
-    margin-top: -15px; 
-    margin-right: 20px;
-    margin-left: 20px;
-
-    /* Adjusts the roundness of the corners */
-    border-radius: 15px;
-
-    /* Activates Flexbox */
-    display: flex; 
-    justify-content: flex-start;
-    flex-direction: row;
+.half-space {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: top; /* Center content vertically */
+    overflow-y:auto;
+    overflow-x: hidden;
 }

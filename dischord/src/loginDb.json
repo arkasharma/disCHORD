@@ -1,1 +1,58 @@
-../loginInfo/loginDb.json
+{
+    "validLogins": [
+      {
+        "id": "26e4",
+        "username": "mateus",
+        "password": "mateus",
+        "email": "mateus"
+      },
+      {
+        "id": "e47f",
+        "username": "Mateus",
+        "password": "Mateus",
+        "email": "mateus@gmail.com"
+      },
+      {
+        "id": "fbac",
+        "username": "Arka",
+        "password": "arka",
+        "email": "arkasharma2004@gmail.com"
+      },
+      {
+        "id": "c844",
+        "username": "Kapil",
+        "password": "Kapil",
+        "email": "kapil"
+      },
+      {
+        "id": "3557",
+        "username": "p",
+        "password": "p",
+        "email": "p"
+      },
+      {
+        "id": "9d1a",
+        "username": "a",
+        "password": "a",
+        "email": "a"
+      },
+      {
+        "id": "45c2",
+        "username": "bruh",
+        "password": "password",
+        "email": "asjkdhsakjdhsakjdhasjkdh"
+      },
+      {
+        "id": "2f5d",
+        "username": "dude",
+        "password": "lolz",
+        "email": "alskdjalskjdalksd"
+      },
+      {
+        "id": "b951",
+        "username": "kl",
+        "password": "kl",
+        "email": "kl"
+      }
+    ]
+  }
