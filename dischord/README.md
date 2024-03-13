@@ -23,7 +23,7 @@ Authenticated Login: Authenticate users for secure access to the app.
 iFrame: A fun feature where you can type in a song name, and the search will return similar songs and a confidence level.
 
 ## Installation
-TODO: Add API Key instructions here, along with Spotify Client ID and general instructions on how to run the startup script. 
+TODO: Add API Key instructions here, along with Spotify Client ID (no keys in README) and general instructions on how to run the startup script. 
 ```
   #Clone the repository and enter it
 git clone https://github.com/arkasharma/disCHORD

@@ -161,6 +161,7 @@ input[type="button"],
       flex: 1;
       border-right: 1px solid rgb(28, 37, 97);
       background-color: #2b2d31;
+      overflow-y: auto;
 
       .navbar {
         display: flex;
@@ -300,6 +301,7 @@ input[type="button"],
         gap: 10px;
 
         input {
+          width: 100%;
           outline: none;
           font-size: 15px;
         }

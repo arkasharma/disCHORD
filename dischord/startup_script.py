@@ -7,6 +7,7 @@ import requests
 
 #install npm packages needed
 os.system("npm install")
+os.system("npm install json-server")
 
 
 # Prompt the user for API keys
