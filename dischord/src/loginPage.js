@@ -43,7 +43,7 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         // Allows for multiple entries of the same username, but should work in either case
         const matchingUsernames = data.userEntries;
         for (let i = 0; i < matchingUsernames.length; i++) {
-          if (matchingUsernames[i].password === password) {
+          if (brcypt.compareSync(password, matchingUsernames[i].password)) {
             //set cookie so that user can be redirected back to the chat page if not logged in
             loggedIn = true;
             Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });

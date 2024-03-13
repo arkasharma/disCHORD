@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 #start up script for the application
 import os
-import sys
 import subprocess
 import requests
 
@@ -58,51 +57,51 @@ else:
 firestore_rest_url = f"https://firestore.googleapis.com/v1/projects/dischord-f6bdb/databases/(default)/documents/api/6bLsW9olWQami2jxuGmx?key={firebase_api_key}"
 response = requests.get(firestore_rest_url)
 if response.status_code == 200:
-        
-        # Parse the JSON response
-        document_data = response.json()
 
-        # Get the value of the "key" field from the document data
-        key_value = document_data.get("fields", {}).get("key", {}).get("stringValue")
+    # Parse the JSON response
+    document_data = response.json()
 
-        auth_domain = document_data.get("fields", {}).get("authDomain", {}).get("stringValue")
-        project_id = document_data.get("fields", {}).get("projectId", {}).get("stringValue")
-        app_id = document_data.get("fields", {}).get("appId", {}).get("stringValue")
-        measurement_id = document_data.get("fields", {}).get("measurementId", {}).get("stringValue")
-        storage_bucket = document_data.get("fields", {}).get("storageBucket", {}).get("stringValue")
-        messaging_sender_id = document_data.get("fields", {}).get("messagingSenderId", {}).get("stringValue")
+    # Get the value of the "key" field from the document data
+    key_value = document_data.get("fields", {}).get("key", {}).get("stringValue")
 
-        # Compare the retrieved key value with the firebase_api_key
-        if key_value == firebase_api_key:
+    auth_domain = document_data.get("fields", {}).get("authDomain", {}).get("stringValue")
+    project_id = document_data.get("fields", {}).get("projectId", {}).get("stringValue")
+    app_id = document_data.get("fields", {}).get("appId", {}).get("stringValue")
+    measurement_id = document_data.get("fields", {}).get("measurementId", {}).get("stringValue")
+    storage_bucket = document_data.get("fields", {}).get("storageBucket", {}).get("stringValue")
+    messaging_sender_id = document_data.get("fields", {}).get("messagingSenderId", {}).get("stringValue")
 
-            with open('.env', 'w') as f:
-                f.write(f'REACT_APP_FIREBASE_API_KEY={key_value}\n')
-                f.write(f'REACT_APP_AUTH_DOMAIN={auth_domain}\n')
-                f.write(f'REACT_APP_PROJECT_ID={project_id}\n')
-                f.write(f'REACT_APP_APP_ID={app_id}\n')
-                f.write(f'REACT_APP_MEASUREMENT_ID={measurement_id}\n')
-                f.write(f'REACT_APP_STORAGE_BUCKET={storage_bucket}\n')
-                f.write(f'REACT_APP_MESSAGING_SENDER_ID={messaging_sender_id}\n')
-                f.write(f'REACT_APP_SPOTIFY_CLIENT_ID={spotify_client_ID}\n')
-                f.write(f'REACT_APP_SPOTIFY_CLIENT_SECRET={spotify_client_secret}\n')
+    # Compare the retrieved key value with the firebase_api_key
+    if key_value == firebase_api_key:
 
-            # Start the first process
-            p1 = subprocess.Popen("npm start", shell=True)
+        with open('.env', 'w') as f:
+            f.write(f'REACT_APP_FIREBASE_API_KEY={key_value}\n')
+            f.write(f'REACT_APP_AUTH_DOMAIN={auth_domain}\n')
+            f.write(f'REACT_APP_PROJECT_ID={project_id}\n')
+            f.write(f'REACT_APP_APP_ID={app_id}\n')
+            f.write(f'REACT_APP_MEASUREMENT_ID={measurement_id}\n')
+            f.write(f'REACT_APP_STORAGE_BUCKET={storage_bucket}\n')
+            f.write(f'REACT_APP_MESSAGING_SENDER_ID={messaging_sender_id}\n')
+            f.write(f'REACT_APP_SPOTIFY_CLIENT_ID={spotify_client_ID}\n')
+            f.write(f'REACT_APP_SPOTIFY_CLIENT_SECRET={spotify_client_secret}\n')
 
-            # Start the second process
-            p2 = subprocess.Popen("json-server --watch loginInfo/loginDb.json --port 8000", shell=True)
+        # Start the first process
+        p1 = subprocess.Popen("npm start", shell=True)
 
-            try:
-                # Wait for them to complete
-                p1.wait()
-                p2.wait()
+        # Start the second process
+        p2 = subprocess.Popen("json-server --watch loginInfo/loginDb.json --port 8000", shell=True)
 
-            except KeyboardInterrupt:
-                # If KeyboardInterrupt (i.e. Ctrl+C) is detected, kill them
-                p1.terminate()
-                p2.terminate()
-                print("Both processes have been terminated.")
+        try:
+            # Wait for them to complete
+            p1.wait()
+            p2.wait()
+
+        except KeyboardInterrupt:
+            # If KeyboardInterrupt (i.e. Ctrl+C) is detected, kill them
+            p1.terminate()
+            p2.terminate()
+            print("\nBoth processes have been terminated.")
 
 
-        else:
-            print("Invalid API key.")
+    else:
+        print("Invalid API key.")
