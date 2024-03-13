@@ -1,0 +1,18 @@
+.spot-search {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 30%;
+    overflow: none;
+    scrollbar-width: none;
+    min-height: max-content;
+}
+
+.half-space {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: top; /* Center content vertically */
+    overflow-y:auto;
+    overflow-x: hidden;
+}

@@ -36,8 +36,14 @@ const ChatPage = () => {
       <div className="container">
         <Sidebar username={username} setSelectedUser={setSelectedUser} />
         <Chat username={username} selectedUser={selectedUser} />
-        <SpotifySearch />
-        <IframeComponent />
+        <div className="spot-search">
+          <div className="half-space">
+            <SpotifySearch />
+          </div>
+          <div className="half-space">
+            <IframeComponent />
+          </div>          
+        </div>        
       </div>
     </div>
   );
