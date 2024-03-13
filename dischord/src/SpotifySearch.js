@@ -167,16 +167,30 @@ const SpotifySearch = () => {
   }, [artistName, trackName, token]); // Depend on token as well to ensure we have it before searching
 
   const playPreview = (songId, previewUrl) => {
+    // if clicking on the same song and it's playing, pause it
+    if (currentSongId === songId && isPlaying) {
       if (previewTrack.current) {
           previewTrack.current.pause();
       }
+      setIsPlaying(false);
+      return;
+    }
 
-      if (currentSongId === songId) {
-        setIsPlaying(false);
-        setCurrentSongId(null);
-        return;
+    // If clicking on the same song and it's paused, resume it
+    if (currentSongId === songId && !isPlaying) {
+      if (previewTrack.current) {
+        previewTrack.current.play();
       }
-
+      setIsPlaying(true);
+      return;
+    }
+    
+    // if selecting a different song or no current song
+    if (currentSongId !== songId || !currentSongId) {
+      // pause current track if it's playing
+      if (previewTrack.current) {
+        previewTrack.current.pause();
+      }
       previewTrack.current = new Audio(previewUrl);
       previewTrack.current.volume = 0.1;
       previewTrack.current.play();
@@ -188,6 +202,8 @@ const SpotifySearch = () => {
 
       setIsPlaying(true);
       setCurrentSongId(songId);
+      return;
+    }
   };
 
   /*
