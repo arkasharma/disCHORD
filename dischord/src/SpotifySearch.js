@@ -39,7 +39,10 @@ const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, Sea
   return (
       <div>
           <SearchBar artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} />
-          <SearchResults />
+          <div className="scroll-container">
+            <SearchResults />
+          </div>
+          
       </div>
   )
 }
@@ -87,6 +90,9 @@ const SpotifySearch = () => {
   const [clientSecret, setClientSecret] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET);
 
   const previewTrack = useRef(null);
+  const [currentSongId, setCurrentSongId] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
 
   // get through spotify dev account
   // process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
@@ -160,69 +166,70 @@ const SpotifySearch = () => {
       return () => clearTimeout(delayDebounceFn);
   }, [artistName, trackName, token]); // Depend on token as well to ensure we have it before searching
 
-  const playPreview = (previewUrl) => {
+  const playPreview = (songId, previewUrl) => {
       if (previewTrack.current) {
           previewTrack.current.pause();
+      }
+
+      if (currentSongId === songId) {
+        setIsPlaying(false);
+        setCurrentSongId(null);
+        return;
       }
 
       previewTrack.current = new Audio(previewUrl);
       previewTrack.current.volume = 0.1;
       previewTrack.current.play();
+
+      previewTrack.current.addEventListener('ended', () => {
+        setIsPlaying(false);
+        setCurrentSongId(null);
+      });
+
+      setIsPlaying(true);
+      setCurrentSongId(songId);
   };
 
+  /*
   const pausePreview = () => {
       if (previewTrack.current) {
           previewTrack.current.pause();
       }
+      setIsPlaying(false);
   };
+  */
 
   const SearchResults = () => {
     return (
       <>
-        <div>
-          {songs.map((song) => (
-            <div className="track-card" key={song.id} style={{ marginBottom: '20px' }}>
-              {song.album.images.length > 0 && (
-                <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                  <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
-                </a>
-              )}     
-              <div className="card-track-artist">
-                <h2>{song.name}</h2>
-                <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
-              </div>
-              <div className="play-button">
-                {song.preview_url && (
-                <>
-                  <button onClick={() => {                    
-                    if (previewTrack.current && previewTrack.current.src === song.preview_url) {
-                      if (previewTrack.current.paused) {
-                        playPreview(song.preview_url);
-                      } else {
-                        pausePreview();
-                      }
-                    } else {
-                      if (previewTrack.current) {
-                        pausePreview();
-                      }
-                      playPreview(song.preview_url);
-                    }
-                  }}>
-                    {previewTrack.current && previewTrack.current.src === song.preview_url && !previewTrack.current.paused ? 
-                      (<img src={pauseButton} alt="Pause" style={{ width: '50px', height: '50px' }}/>) : (<img src={playButton} alt="Play" style={{ width: '50px', height: '50px' }}/>)}
-                  </button>
-                </>
-                )}
-              </div>              
+        {songs.map((song) => (
+          <div className="track-card" key={song.id} style={{ marginBottom: '20px' }}>
+            {song.album.images.length > 0 && (
+              <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
+              </a>
+            )}     
+            <div className="card-track-artist">
+              <h2>{song.name}</h2>
+              <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
             </div>
-          ))}
-        </div>
+            <div className="play-button">
+              {song.preview_url && (
+                <button onClick={() => playPreview(song.id, song.preview_url)}>
+                  {currentSongId === song.id && isPlaying ? 
+                    (<img src={pauseButton} alt="Pause" style={{ width: '40px', height: '40px' }}/>) : 
+                    (<img src={playButton} alt="Play" style={{ width: '40px', height: '40px' }}/>)}
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
       </>
     );
   }
 
   return (
-      <div class="scrollable-content">
+      <div class="main-container">
           {isError ? <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> : <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} />}
       </div>
   );
