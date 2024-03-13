@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Sidebar from "./ChatComponents/Sidebar.js";
 import Chat from "./ChatComponents/Chat.js";

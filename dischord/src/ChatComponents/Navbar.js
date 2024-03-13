@@ -19,7 +19,7 @@ const Navbar = (prop) => {
         <span>{username}</span>
         <div onClick={logout}>
           {/* make clickable element*/}
-          <span class="clickable">Logout</span>
+          <span className="clickable">Logout</span>
         </div>
       </div>
     </div>

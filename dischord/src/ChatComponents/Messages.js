@@ -35,7 +35,7 @@ const Messages = ({ username, selectedUser }) => {
                 unSub();
             }
         }
-    },[combinedID])
+    },[combinedID, selectedUser])
 
     console.log(messages);
     return (

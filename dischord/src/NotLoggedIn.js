@@ -4,7 +4,7 @@ const NotLoggedIn = () => {
     <div id="hom">
       <h2 id="notSignedIn"> Not Logged In</h2>
       <span id="signIn">
-        Please use the following link to signin:
+        Please use the following link to sign in:
         <br />
         <Link to="/login">Click here to Login!</Link>{" "}
       </span>

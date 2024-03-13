@@ -113,6 +113,7 @@ input[type="button"],
 }
 
 #notSignedIn {
+  margin: 0;
   font-size: 275%;
   color: rgb(65, 81, 105);
   text-align: center;
