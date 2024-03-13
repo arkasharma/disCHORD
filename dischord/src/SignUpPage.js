@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import bcrypt from "bcryptjs";
+import CryptoJS from "crypto-js";
+
+//create function to hash the password
+function hashPassword(password) {
+  return CryptoJS.SHA256(password).toString();
+}
 
 const SignUpPage = () => {
   // init state variable
@@ -41,10 +46,6 @@ const SignUpPage = () => {
   const handleSub = (e) => {
     const user = { ...formData };
 
-    //ADD: hashing for the password
-    const salt = bcrypt.genSaltSync(10);
-    user.password = bcrypt.hashSync(user.password, salt);
-
     // Handle form submission logic here
     //if the form does not have all the required information just return
     //don't save the form
@@ -65,6 +66,9 @@ const SignUpPage = () => {
     //check if the username already exists
     // if it does, alert the user and return
     // if the username is not already taken then the array will be empty
+
+    // hash the password
+    user.password = hashPassword(user.password);
 
     fetchUsernames().then((existingUsernames) => {
       //check if the username already exists

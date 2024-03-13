@@ -59,6 +59,48 @@
       "username": "mateus1",
       "password": "$2a$10$/y3w10/a6Ib8KOoMVDilPOAGrQKoVmaoBQjriTLq38osPR.kz/Sr6",
       "email": "asdf"
+    },
+    {
+      "id": "b08a",
+      "username": "mateus2",
+      "password": {},
+      "email": "asdf"
+    },
+    {
+      "id": "7576",
+      "username": "mateu3",
+      "password": {},
+      "email": "asdf"
+    },
+    {
+      "id": "6909",
+      "username": "mateus4",
+      "password": {},
+      "email": "asdf"
+    },
+    {
+      "id": "0601",
+      "username": "mateus6",
+      "password": "asdf",
+      "email": "asdf"
+    },
+    {
+      "id": "10da",
+      "username": "moose",
+      "password": "mateus",
+      "email": "asdf"
+    },
+    {
+      "id": "7269",
+      "username": "moose1",
+      "password": "masd",
+      "email": "asdf"
+    },
+    {
+      "id": "df44",
+      "username": "moose5",
+      "password": "1957b9981fc9cfa67abff7eb73045b55f99b9673f7637e138fd3f8c7a1313e94",
+      "email": "asdf"
     }
   ]
 }
