@@ -53,6 +53,12 @@
       "username": "kl",
       "password": "kl",
       "email": "kl"
+    },
+    {
+      "id": "61a5",
+      "username": "mateus1",
+      "password": "$2a$10$/y3w10/a6Ib8KOoMVDilPOAGrQKoVmaoBQjriTLq38osPR.kz/Sr6",
+      "email": "asdf"
     }
   ]
 }
