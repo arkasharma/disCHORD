@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import byrcrypt from "bcryptjs";
 
 const SignUpPage = () => {
   // init state variable
@@ -39,7 +40,10 @@ const SignUpPage = () => {
   // handle the submission of the form
   const handleSub = (e) => {
     const user = { ...formData };
+
     //ADD: hashing for the password
+    const salt = byrcrypt.genSaltSync(10);
+    user.password = byrcrypt.hashSync(user.password, salt);
 
     // Handle form submission logic here
     //if the form does not have all the required information just return
