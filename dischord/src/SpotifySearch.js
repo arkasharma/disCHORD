@@ -3,6 +3,9 @@ import qs from "qs";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./SpotifySearch.css";
+import pauseButton from "./images/pauseButton.png";
+import playButton from "./images/playButton.png";
+
 
 // npm install dotenv axios
 
@@ -191,21 +194,22 @@ const SpotifySearch = () => {
               <div className="play-button">
                 {song.preview_url && (
                 <>
-                  <button className="btn btn-primary" onClick={() => {                    
-                  if (previewTrack.current && previewTrack.current.src === song.preview_url) {
-                    if (previewTrack.current.paused) {
-                    playPreview(song.preview_url);
+                  <button onClick={() => {                    
+                    if (previewTrack.current && previewTrack.current.src === song.preview_url) {
+                      if (previewTrack.current.paused) {
+                        playPreview(song.preview_url);
+                      } else {
+                        pausePreview();
+                      }
                     } else {
-                    pausePreview();
+                      if (previewTrack.current) {
+                        pausePreview();
+                      }
+                      playPreview(song.preview_url);
                     }
-                  } else {
-                    if (previewTrack.current) {
-                    pausePreview();
-                    }
-                    playPreview(song.preview_url);
-                  }
                   }}>
-                  {!previewTrack.current || previewTrack.current.paused ? 'Play' : 'Pause'}
+                    {previewTrack.current && previewTrack.current.src === song.preview_url && !previewTrack.current.paused ? 
+                      (<img src={pauseButton} alt="Pause" style={{ width: '50px', height: '50px' }}/>) : (<img src={playButton} alt="Play" style={{ width: '50px', height: '50px' }}/>)}
                   </button>
                 </>
                 )}

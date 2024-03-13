@@ -50,6 +50,21 @@
         display: flex; /* Add this property */
         padding-left: 10px;
         padding-right: 10px;
+        img {
+            background-color: transparent;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            transition: transform 0.3s; /* Adds a smooth animation on hover */
+            will-change: transform; /* Improves performance by letting the browser know what to expect */
+        }
+        button:hover {
+            transform: scale(1.1); /* Increases size on hover */
+            transition: transform 0.3s; /* Adds a smooth animation on hover */
+            transform-origin: center; /* Ensures the button grows from the center */
+        }
     }
 }
 
