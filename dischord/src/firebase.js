@@ -1,19 +1,17 @@
 import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 // correct API key: AIzaSyAf-DA_qokjI6KThbHxob9C5AU0ZHM3oLU
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  //authDomain: "dischord-f6bdb.firebaseapp.com",
-  projectId: "dischord-f6bdb",
-  //storageBucket: "dischord-f6bdb.appspot.com",
-  //messagingSenderId: "272277364746",
-  appId: "1:272277364746:web:00664154f844aac9c37ff3",
-  //measurementId: "G-NVSN23EZ02"
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
-
+console.log(firebaseConfig)
 export const app = initializeApp(firebaseConfig);
-//export const analytics = getAnalytics(app);
 export const db = getFirestore();
