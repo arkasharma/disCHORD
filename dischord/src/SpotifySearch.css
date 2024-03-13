@@ -96,9 +96,10 @@
 
 
 
-.scrollable-content {
+.main-container {
     background-color: black;
     overflow-x: hidden;
+    overflow-y: auto; /* Set to hidden to disable vertical scrolling */
 }
 
 .error-card {
