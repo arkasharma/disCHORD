@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase.js";
+import CryptoJS from "crypto-js";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   const history = useHistory();
