@@ -8,6 +8,9 @@ import requests
 os.system("npm install")
 os.system("npm install json-server")
 
+#init our local json file/server
+with open('loginInfo/loginDb.json', 'w') as f:
+    f.write('{"validLogins": []}')
 
 # Prompt the user for API keys
 # Save this input to the environment variables

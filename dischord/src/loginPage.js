@@ -1,86 +1,72 @@
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import CryptoJS from "crypto-js";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase.js";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   const history = useHistory();
   let loggedIn = false;
   const [isLoggedIn, setIsLoggedIn] = useState("init");
+  //set up fetched data from firebase
+  const [loginData, setLoginData] = useState([]);
 
-  const fetchData = () => {
-    return fetch("http://localhost:8000/validLogins")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Bad network response unable to fetch data");
-        }
-        return response.json();
-      })
-      .then((jsonData) => {
-        // usernames = jsonData.map((item) => item.username);
-        // passwords = jsonData.map((item) => item.password);
-        //grab only entry with that specific username
-        const userEntries = jsonData.filter(
-          (item) => item.username === username
-        );
-        return { userEntries };
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        return { error: error.message };
-      });
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "usernames"));
+      setLoginData(querySnapshot.docs.map((doc) => doc.data()));
+    };
+    fetchData();
+  }, []);
+  console.log(loginData);
 
   const checkValidation = (e) => {
     e.preventDefault();
+    if (username === loginData.username && password === loginData.password) {
+      loggedIn = true;
+      Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+      setIsLoggedIn("true");
+      //console.log(isLoggedIn);
+      history.push("/");
+    }
+    // //check if the password matches
+    // // COULD CHANGE: could change based on later specifications
+    // // Allows for multiple entries of the same username, but should work in either case
+    // const matchingUsernames = data.userEntries;
+    // for (let i = 0; i < matchingUsernames.length; i++) {
+    //   if (
+    //     CryptoJS.SHA256(password).toString() ===
+    //     matchingUsernames[i].password
+    //   ) {
+    //     //set cookie so that user can be redirected back to the chat page if not logged in
+    //     loggedIn = true;
+    //     Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+    //     setIsLoggedIn("true");
+    //     //console.log(isLoggedIn);
+    //     history.push("/");
+    //   }
+    // }
 
-    // call to fetch the data and then must wait for the return
-    fetchData()
-      .then((data) => {
-        //data contains the information from the json server
-        console.log(data);
-        //check if the password matches
-        // COULD CHANGE: could change based on later specifications
-        // Allows for multiple entries of the same username, but should work in either case
-        const matchingUsernames = data.userEntries;
-        for (let i = 0; i < matchingUsernames.length; i++) {
-          if (
-            CryptoJS.SHA256(password).toString() ===
-            matchingUsernames[i].password
-          ) {
-            //set cookie so that user can be redirected back to the chat page if not logged in
-            loggedIn = true;
-            Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
-            setIsLoggedIn("true");
-            //console.log(isLoggedIn);
-            history.push("/");
-          }
-        }
+    if (loggedIn !== true) {
+      //isLoggedIn = false;
+      setIsLoggedIn("false");
+      loggedIn = false;
+      //console.log(isLoggedIn);
+      Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
+      //Cookies.set("username", username, { expires: 1 / 24, path: "/" });
+      setPassword("");
+    }
 
-        if (loggedIn !== true) {
-          //isLoggedIn = false;
-          setIsLoggedIn("false");
-          loggedIn = false;
-          //console.log(isLoggedIn);
-          Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
-          //Cookies.set("username", username, { expires: 1 / 24, path: "/" });
-          setPassword("");
-        }
+    if (loggedIn === true) {
+      Cookies.set("username", username, { expires: 1 / 24, path: "/" });
+    }
 
-        if (loggedIn === true) {
-          Cookies.set("username", username, { expires: 1 / 24, path: "/" });
-        }
-
-        // if (usernames.find((e) => e === username)) {
-        //   //alert("Here!");
-        //   console.log("sucess");
-        //   history.push("/chat");
-        // }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    // if (usernames.find((e) => e === username)) {
+    //   //alert("Here!");
+    //   console.log("sucess");
+    //   history.push("/chat");
+    // }
   };
 
   return (

@@ -1,27 +1,8 @@
 import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
-import { getApps, initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-
-// Initialize firebase
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-};
-
-let app;
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApps()[0];
-}
-
-const db = getFirestore(app);
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase.js";
 
 //create function to hash the password
 function hashPassword(password) {
@@ -72,7 +53,7 @@ const SignUpPage = () => {
       return;
     }
     if (formData.password.length < 5) {
-      alert("Username must be at least 5 characters long");
+      alert("Password must be at least 5 characters long");
       return;
     }
     //check if the password contains atleast a letter and a number
