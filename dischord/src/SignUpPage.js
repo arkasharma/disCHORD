@@ -66,6 +66,19 @@ const SignUpPage = () => {
       return;
     }
 
+    //check if the username has invalid characters
+    //check if the username contains a { or } or " or ' or [ or ]
+    if (
+      formData.username.includes("{") ||
+      formData.username.includes("}") ||
+      formData.username.includes('"') ||
+      formData.username.includes("'") ||
+      formData.username.includes("[") ||
+      formData.username.includes("]")
+    ) {
+      alert("Username cannot contain { or }");
+      return;
+    }
     if (formData.password === "") {
       alert("Please enter a password");
       return;
@@ -86,7 +99,8 @@ const SignUpPage = () => {
         body: JSON.stringify(user),
       }).then(() => {
         syncLoginDb();
-        history.push("/signedUp")});
+        history.push("/signedUp");
+      });
     }
   };
 
