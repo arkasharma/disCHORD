@@ -23,30 +23,16 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
 
   const checkValidation = (e) => {
     e.preventDefault();
-    if (username === loginData.username && password === loginData.password) {
+    if (
+      username === loginData.username &&
+      CryptoJS.SHA256(password).toString() === loginData.password
+    ) {
       loggedIn = true;
       Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
       setIsLoggedIn("true");
       //console.log(isLoggedIn);
       history.push("/");
     }
-    // //check if the password matches
-    // // COULD CHANGE: could change based on later specifications
-    // // Allows for multiple entries of the same username, but should work in either case
-    // const matchingUsernames = data.userEntries;
-    // for (let i = 0; i < matchingUsernames.length; i++) {
-    //   if (
-    //     CryptoJS.SHA256(password).toString() ===
-    //     matchingUsernames[i].password
-    //   ) {
-    //     //set cookie so that user can be redirected back to the chat page if not logged in
-    //     loggedIn = true;
-    //     Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });
-    //     setIsLoggedIn("true");
-    //     //console.log(isLoggedIn);
-    //     history.push("/");
-    //   }
-    // }
 
     if (loggedIn !== true) {
       //isLoggedIn = false;
