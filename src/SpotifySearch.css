@@ -1,5 +1,5 @@
 .track-card {
-    background-color: #414141; /* Background color */
+    background-color: #262626; /* Background color */
     color: white;
 
     /* Padding inside the box */
@@ -22,6 +22,9 @@
     justify-content: space-between;
     overflow: hidden; /* Added to prevent content from spilling */
 
+    transition: background-color 0.3s, transform 0.5s; /* Adds a smooth animation on hover */
+    will-change: transform; /* Improves performance by letting the browser know what to expect */
+
     .album-img {
         border-radius: 10%; /* Creates a circle shape. Adjust as needed. */
         width: 100px; /* Set a specific width */
@@ -43,7 +46,31 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            color: #a9a9a9;   
+            color: #a9a9a9;
+        }
+        .song-name {
+            color: #ffffff; /* Changes the color of the link */
+            text-decoration: none; /* Removes the underline */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transition: color 0.5s; /* Adds a smooth animation on hover */
+        }
+        .song-name:hover {
+            color: #1ED760; /* Changes the color of the link on hover */
+            text-decoration: underline;
+        }
+        .artist-name {
+            color: #a9a9a9; /* Changes the color of the link */
+            text-decoration: none; /* Removes the underline */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transition: color 0.5s; /* Adds a smooth animation on hover */
+        }
+        .artist-name:hover {
+            color: #dedede; /* Changes the color of the link on hover */
+            text-decoration: underline;
         }
     }
     .play-button {
@@ -67,6 +94,12 @@
             transform-origin: center; /* Ensures the button grows from the center */
         }
     }
+}
+.track-card:hover {
+     /* Increases size on hover */
+    transform: scale(1.05);
+    background-color: #414141; /* Changes background color on hover */
+    transition: transform 0.3s, background-color 0.5s; /* Adds a smooth animation on hover */
 }
 
 .search-bubble {

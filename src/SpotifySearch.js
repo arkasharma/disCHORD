@@ -161,12 +161,6 @@ const SpotifySearch = () => {
 
   const [volume, setVolume] = useState(0.1);
 
-
-
-
-  // get through spotify dev account
-  // process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
-
   const handleVolumeChange = (event) => {
     const volume = event.target.value;
     setVolume(volume);
@@ -301,8 +295,17 @@ const SpotifySearch = () => {
               </a>
             )}
             <div className="card-track-artist">
-              <h2>{song.name}</h2>
-              <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
+              <h2><a className="song-name" href={song.external_urls.spotify}>{song.name}</a></h2>
+              <p>
+                {song.artists.map((artist, index) => (
+                  <span key={artist.id}>
+                    <a className="artist-name" href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                      {artist.name}
+                    </a>
+                    {index < song.artists.length - 1 ? ', ' : ''}
+                  </span>
+                ))}
+              </p>
               <p>
                 <CopyLinkButton link={song.external_urls.spotify}/>
               </p>
