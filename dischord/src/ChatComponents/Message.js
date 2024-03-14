@@ -7,12 +7,13 @@ const Message = ({username, selectedUser, message}) => {
 
     useEffect(() => {
         let unSub;
+        if (username) {
         unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
                 if (doc.exists()) {
                     setCurrentUserID(doc.data().id);
                 }
         })
-
+        }
         return () => {
             if (unSub) {
                 unSub();

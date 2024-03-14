@@ -12,7 +12,6 @@ import { syncLoginDb } from "./syncLoginDb.js";
 
 //require dotenv for the environment variables
 //require("dotenv").config({ path: "../.env" });
-console.log(process.env.REACT_APP_SPOTIFY_API_KEY);
 
 function App() {
   // create stateVariables
