@@ -3,7 +3,6 @@ import { collection, query, where, getDocs, getDoc } from "firebase/firestore"
 import { doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore"; 
 import { serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.js"
-import loginDb from "../loginDb.json";
 
 const SearchBar = (prop) => {
     const { username } = prop;

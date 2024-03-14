@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase.js';
-import loginDb from '../loginDb.json'
 import Message from './Message.js';
 
 const Messages = ({ username, selectedUser }) => {

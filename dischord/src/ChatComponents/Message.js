@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase.js';
-import loginDb from '../loginDb.json'
 
 const Message = ({username, selectedUser, message}) => {
     const [currentUserID, setCurrentUserID] = useState("");
@@ -21,16 +20,6 @@ const Message = ({username, selectedUser, message}) => {
         }
     }, [username]);
     
-    /*
-    let currentUserID;
-    loginDb.validLogins.forEach(user => {
-        if (user.username === username) {
-
-            // If the username matches, store the userID and exit the loop
-            currentUserID = user.id;
-        }
-    });
-    */
     const ref = useRef()
 
     useEffect (() => {

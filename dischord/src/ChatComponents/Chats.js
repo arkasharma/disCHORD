@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { doc, onSnapshot } from "firebase/firestore";
-import {db} from "../firebase.js";
-import loginDb from "../loginDb.json";
+import { db } from "../firebase.js";
 
 const Chats = ({ username, handleSelect }) => {
     const [chats, setChats] = useState([])
@@ -21,18 +20,6 @@ const Chats = ({ username, handleSelect }) => {
             }
         }
     }, [username]);
-    
-    /*
-    // Iterate through the validLogins array to find the user with the matching username
-    let currentUserID;
-    loginDb.validLogins.forEach(user => {
-        if (user.username === username) {
-
-            // If the username matches, store the userID and exit the loop
-            currentUserID = user.id;
-        }
-    });
-    */
 
     useEffect(() => {
        const getChats = () => {

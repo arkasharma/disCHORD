@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { arrayUnion, updateDoc, Timestamp, serverTimestamp } from 'firebase/firestore';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase.js';
-import loginDb from '../loginDb.json';
 import { v4 as uuid } from 'uuid';
 
 
@@ -24,17 +23,7 @@ const Input = ({username, selectedUser}) => {
             }
         }
     }, [username]);
-    
-    /*
-    let currentUserID;
-    loginDb.validLogins.forEach(user => {
-        if (user.username === username) {
-
-            // If the username matches, store the userID and exit the loop
-            currentUserID = user.id;
-        }
-    });
-*/
+  
     const combinedID = 
         currentUserID > selectedUser?.id
         ? currentUserID + selectedUser?.id
