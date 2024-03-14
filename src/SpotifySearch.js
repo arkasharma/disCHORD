@@ -42,7 +42,8 @@ const SearchBar = ({ artistName, setArtistName, trackName, setTrackName, volume,
 
   useEffect(() => {
     const percentage = (volume / 1.0) * 100; // Assuming max volume is 1.0
-    setSliderBackground(`linear-gradient(to right, #ffff 0%, #ffff ${percentage}%, #4d4d4d ${percentage}%, #4d4d4d 100%)`);
+    const adjustedPercentage = percentage + 1.5; // Increase the gradient percentage by 2
+    setSliderBackground(`linear-gradient(to right, #ffff 0%, #ffff ${adjustedPercentage}%, #4d4d4d ${adjustedPercentage}%, #4d4d4d 100%)`);
   }, [volume]);
 
 
@@ -96,31 +97,47 @@ const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, Sea
   )
 }
 
-const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, setClientSecret, getAccessToken}) => {
+const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, setClientSecret}) => {
+  const [clientIdInput, setClientIdInput] = useState(clientId);
+  const [clientSecretInput, setClientSecretInput] = useState(clientSecret);
+
+  const handleClientIdChange = (event) => {
+    setClientIdInput(event.target.value);
+  };
+
+  const handleClientSecretChange = (event) => {
+    setClientSecretInput(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    setClientId(clientIdInput);
+    setClientSecret(clientSecretInput);
+  };
+
   return (
     <div className="error-card">
-      <p> Please enter a valid Client ID and Client Secret </p>
-      <p><strong>Error: </strong>{error}</p>
-      <p className="err-txt" ><strong>Error Description: </strong>{errorDes}</p>
+      <div className="err-top-txt"> Please enter a valid Client ID and Client Secret </div>
+      <div><strong>Error: </strong>{error}</div>
+      <div className="err-txt-bot" ><strong>Error Description: </strong>{errorDes}</div>
       <div>        
         <div><strong>Client ID</strong></div>
         <input
             className="input-stuff"
             type="text"
             placeholder="Client ID"
-            value={clientId}
-            onChange={e => setClientId(e.target.value)}
+            value={clientIdInput}
+            onChange={handleClientIdChange}
         />
         <div><strong>Client Secret</strong></div>
         <input
             className="input-stuff"
             type="text"
             placeholder="Client Secret"
-            value={clientSecret}
-            onChange={e => setClientSecret(e.target.value)}
+            value={clientSecretInput}
+            onChange={handleClientSecretChange}
         />        
       </div>
-      <button className="spot-button" onClick={getAccessToken}>Retry Spotify API Keys</button>
+      <button className="spot-button" onClick={handleButtonClick}>Set Client ID and Secret</button>
     </div>
   );
 }
@@ -200,8 +217,6 @@ const SpotifySearch = () => {
   
   // Call getAccessToken once when the component mounts
   useEffect(() => {
-    
-
     getAccessToken();
   }, [getAccessToken]);
 
@@ -284,7 +299,7 @@ const SpotifySearch = () => {
               <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
                 <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '85px', height: '85px', marginRight: '10px' }} />
               </a>
-            )}     
+            )}
             <div className="card-track-artist">
               <h2>{song.name}</h2>
               <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
@@ -308,9 +323,12 @@ const SpotifySearch = () => {
   }
 
   return (
-      <div className="main-container">
-          {isError ? <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> : <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} />}
-      </div>
+    <div class="main-container">
+      {isError ? 
+        <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> :
+        <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} volume={volume} handleVolumeChange={handleVolumeChange}/>
+      }
+    </div>
   );
 };
 
