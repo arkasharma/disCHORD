@@ -2,17 +2,36 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase.js";
 import CryptoJS from "crypto-js";
+import { syncLoginDb } from "./syncLoginDb.js";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   const history = useHistory();
   let loggedIn = false;
   const [isLoggedIn, setIsLoggedIn] = useState("init");
   //set up fetched data from firebase
-  const [loginData, setLoginData] = useState([]);
+  //const [loginData, setLoginData] = useState([]);
+  const [passwordDb, setPasswordDb] = useState("");
 
+  useEffect(() => {
+    let unSub;
+    if (username) {
+      unSub = onSnapshot(doc(db, "usernames", username), (doc) => {
+        if (doc.exists()) {
+          setPasswordDb(doc.data().password);
+        }
+      });
+    }
+    return () => {
+      if (unSub) {
+        unSub();
+      }
+    };
+  }, [username]);
+
+  /*
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "usernames"));
@@ -21,12 +40,18 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
     fetchData();
   }, []);
   console.log(loginData);
+*/
+
 
   const checkValidation = (e) => {
+      syncLoginDb();
+    console.log("db password: ", passwordDb)
+    console.log("dad55", CryptoJS.SHA256("dad55").toString())
+    console.log("hash", CryptoJS.SHA256(password).toString())
     e.preventDefault();
-    if (
-      username === loginData.username &&
-      CryptoJS.SHA256(password).toString() === loginData.password
+
+    if (passwordDb !== "" &&
+      CryptoJS.SHA256(password).toString() === passwordDb
     ) {
       loggedIn = true;
       Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });

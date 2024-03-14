@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase.js";
+import { syncLoginDb } from "./syncLoginDb.js";
 
 //create function to hash the password
 function hashPassword(password) {
@@ -83,7 +84,9 @@ const SignUpPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
-      }).then(() => history.push("/signedUp"));
+      }).then(() => {
+        syncLoginDb();
+        history.push("/signedUp")});
     }
   };
 
