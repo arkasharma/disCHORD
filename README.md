@@ -25,11 +25,11 @@ iFrame: A fun feature where you can type in a song name, and the search will ret
 ## Installation
 TODO: Add API Key instructions here, along with Spotify Client ID (no keys in README) and general instructions on how to run the startup script. 
 ```
-#Clone the repository and enter it
+# Clone the repository and enter it
 git clone https://github.com/arkasharma/disCHORD
 cd disCHORD
 
-#Other Option Download Source Code
+# Other Option Download Source Code
 cd (file_downloaded)
 ./startup_script.py
 ```
@@ -37,9 +37,9 @@ cd (file_downloaded)
 ## Running
 
 ```
-#Run the statrt up script 
+# Run the statrt up script
+# Then prove the needed API keys for firebase and spotify search
 ./startup_script.py
-#Then prove the needed API keys for firebase and spotify search
 ```
 
 # NoteWorthy 
