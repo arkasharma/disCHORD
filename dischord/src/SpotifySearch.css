@@ -4,14 +4,14 @@
 
     /* Padding inside the box */
     padding-top: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 6.5px;
     padding-left: 10px;
 
     /* Outer space around the box */
-    margin-top: 0px; 
+    margin-top: -12px; 
     margin-right: 10px;
     margin-left: 10px;
-    margin-bottom: -10px;
+    margin-bottom: -12px;
 
     /* Adjusts the roundness of the corners */
     border-radius: 10px;
@@ -88,15 +88,71 @@
     width: 27.7%;
     
     .search-title {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        padding-right: 10px;
         padding-left: 10px;
         padding-top: 5px;
         font-size: 20px;
         font-weight: bold;
+
+        .left-item {
+            align-self: flex-start;
+        }
+
+        .right-item {
+            font-size: 15px;
+            align-self: flex-end;
+        }
     }
     .search-input {
         padding-left: 0px;
         display: flex;
         flex-direction: row;
+    }
+
+    .volume-slider-container {
+        display: flex;
+        justify-content:flex-start;
+        flex-direction: row;
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-top: -10px;
+        padding-bottom: 15px;
+        align-items: center;
+        font-size: 15px;
+        font-weight: bold;
+        color: #b1b1b1;
+        
+        input[type=range] {
+            appearance: none;           
+            margin-left: 15px;
+            width: 120px;
+            height: 8px;
+            background-color: #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none; /* Remove the outline */
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            appearance: none; /* Removes the default appearance */
+            width: 8px; /* Set a specific width */
+            height: 8px; /* Set a specific height */
+            background-color: #ffffff; /* Set the color of the thumb */
+            border-radius: 50%; /* Creates a circle shape */
+            cursor: pointer; /* Add a pointer on hover */
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            appearance: none; /* Removes the default appearance */
+            width: 12px; /* Set a specific width */
+            height: 12px; /* Set a specific height */
+            background-color: #ffff; /* Set the color of the thumb */
+            border-radius: 50%; /* Creates a circle shape */
+            cursor: pointer; /* Add a pointer on hover */
+        }
     }
 }
 
@@ -138,7 +194,7 @@
     overflow-x: hidden; /* Disables horizontal scrolling */
     min-height: 100vh;
     max-height: 200vh; /* Sets the maximum height of the container */
-    margin-top: 110px;
+    margin-top: 145px;
     padding: 10px; /* Adds space around the content */
 }
 
@@ -178,21 +234,6 @@
 
 input::placeholder {
     color: #676767;
-}
-
-.spot-button {
-    background-color: #1ED760;
-    color: #121212;
-    border: none;
-    border-radius: 20px;
-    padding: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin: 5px;
-    font-size: 15px;
-    cursor: pointer;
-
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .spot-button2 {
@@ -256,6 +297,7 @@ input::placeholder {
     background-color: #095e2f; /* Changes background color on button press */
     color: #FFFFFF; /* Changes text color on button press */
 }
+
 
 
 

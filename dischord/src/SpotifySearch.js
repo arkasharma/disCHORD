@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import qs from "qs";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./SpotifySearch.css";
 import pauseButton from "./images/pauseButton.png";
 import playButton from "./images/playButton.png";
-import linkButton from "./images/linkButton.png";
+import { useCallback } from "react";
+//import linkButton from "./images/linkButton.png";
 
 
 // npm install dotenv axios
@@ -36,7 +37,15 @@ const CopyLinkButton = ({ link }) => {
   );
 }
 
-const SearchBar = ({ artistName, setArtistName, trackName, setTrackName }) => {
+const SearchBar = ({ artistName, setArtistName, trackName, setTrackName, volume, handleVolumeChange }) => {
+  const [sliderBackground, setSliderBackground] = useState('');
+
+  useEffect(() => {
+    const percentage = (volume / 1.0) * 100; // Assuming max volume is 1.0
+    setSliderBackground(`linear-gradient(to right, #ffff 0%, #ffff ${percentage}%, #4d4d4d ${percentage}%, #4d4d4d 100%)`);
+  }, [volume]);
+
+
   return (
       <div className="search-bubble">
         <div className="search-title">
@@ -58,14 +67,27 @@ const SearchBar = ({ artistName, setArtistName, trackName, setTrackName }) => {
             onChange={e => setTrackName(e.target.value)}
           />
         </div>
+        <div className="volume-slider-container">
+          Volume
+          <input
+            className="volume-slider"
+            type="range"
+            min="0.0"
+            max="1.0"
+            step="0.01"
+            value={volume}
+            onChange={handleVolumeChange}
+            style={{ background: sliderBackground }}
+          />
+        </div>
       </div>           
   );
 }
 
-const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, SearchResults }) => {
+const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, SearchResults, volume, handleVolumeChange }) => {
   return (
       <div>
-          <SearchBar artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} />
+          <SearchBar artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} volume={volume} handleVolumeChange={handleVolumeChange}/>
           <div className="scroll-container">
             <SearchResults />
           </div>
@@ -78,8 +100,8 @@ const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, se
   return (
     <div className="error-card">
       <p> Please enter a valid Client ID and Client Secret </p>
-      <a><strong>Error: </strong>{error}</a>
-      <a className="err-txt" ><strong>Error Description: </strong>{errorDes}</a>
+      <p><strong>Error: </strong>{error}</p>
+      <p className="err-txt" ><strong>Error Description: </strong>{errorDes}</p>
       <div>        
         <div><strong>Client ID</strong></div>
         <input
@@ -120,6 +142,9 @@ const SpotifySearch = () => {
   const [currentSongId, setCurrentSongId] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const [volume, setVolume] = useState(0.1);
+
+
 
 
   // get through spotify dev account
@@ -127,26 +152,33 @@ const SpotifySearch = () => {
   // valid client ID: 5771f0e8e76d437fab9f53ab1013b52f
   // valid client secret: ad31668a1ffb41d1bf996971d5be636b
 
-  const getAccessToken = async () => {
+  const handleVolumeChange = (event) => {
+    const volume = event.target.value;
+    setVolume(volume);
+    if (previewTrack.current) {
+      previewTrack.current.volume = volume;
+    }
+  };
+
+  const getAccessToken = useCallback(async () => {
     try {
       const result = await axios('https://accounts.spotify.com/api/token', {
-          headers: {
-              'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
-              'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data: qs.stringify({ grant_type: 'client_credentials' }),
-          method: 'POST'
+        headers: {
+          'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: qs.stringify({ grant_type: 'client_credentials' }),
+        method: 'POST'
       });
-        
+
       setToken(result.data.access_token);
       setIsError(false);
       setError('');
       setErrorDes('');
-    }
-    catch (error) {
+    } catch (error) {
       // Handling Axios errors
       setIsError(true);
-      
+
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
@@ -166,32 +198,34 @@ const SpotifySearch = () => {
         setErrorDes('There was an error setting up the request: ' + error.message);
       }
     }
-  };
-
-  const searchSongs = async () => {
-    if (!token || (!artistName.trim() && !trackName.trim()))
-      return;
-    const { data } = await axios(`https://api.spotify.com/v1/search?q=${artistName} ${trackName}&type=track&limit=5`, {
-      headers: {
-          'Authorization': `Bearer ${token}`
-      },
-      method: 'GET'
-    });
-    setSongs(data.tracks.items);
-  };
-
+  }, [clientId, clientSecret, setToken, setIsError, setError, setErrorDes]);
+  
   // Call getAccessToken once when the component mounts
   useEffect(() => {
-      getAccessToken();
-  }, []);
+    
+
+    getAccessToken();
+  }, [getAccessToken]);
 
   // Automatically search when artistName or trackName changes and token is available
   useEffect(() => {
-      const delayDebounceFn = setTimeout(() => {
-          searchSongs();
-      }, 1000); // Add debounce delay of X ms to reduce the number of API calls
+    const searchSongs = async () => {
+      if (!token || (!artistName.trim() && !trackName.trim()))
+        return;
+      const { data } = await axios(`https://api.spotify.com/v1/search?q=${artistName} ${trackName}&type=track&limit=5`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        method: 'GET'
+      });
+      setSongs(data.tracks.items);
+    };
 
-      return () => clearTimeout(delayDebounceFn);
+    const delayDebounceFn = setTimeout(() => {
+        searchSongs();
+    }, 1000); // Add debounce delay of X ms to reduce the number of API calls
+
+    return () => clearTimeout(delayDebounceFn);
   }, [artistName, trackName, token]); // Depend on token as well to ensure we have it before searching
 
   const playPreview = (songId, previewUrl) => {
@@ -277,7 +311,10 @@ const SpotifySearch = () => {
 
   return (
       <div class="main-container">
-          {isError ? <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> : <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} />}
+          {isError ? 
+            <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> :
+            <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} volume={volume} handleVolumeChange={handleVolumeChange}/>
+          }
       </div>
   );
 };
