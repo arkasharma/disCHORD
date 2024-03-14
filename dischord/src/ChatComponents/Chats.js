@@ -5,7 +5,24 @@ import loginDb from "../loginDb.json";
 
 const Chats = ({ username, handleSelect }) => {
     const [chats, setChats] = useState([])
+    const [currentUserID, setCurrentUserID] = useState("");
 
+    useEffect(() => {
+        let unSub;
+        unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
+                if (doc.exists()) {
+                    setCurrentUserID(doc.data().id);
+                }
+        })
+
+        return () => {
+            if (unSub) {
+                unSub();
+            }
+        }
+    }, [username]);
+    
+    /*
     // Iterate through the validLogins array to find the user with the matching username
     let currentUserID;
     loginDb.validLogins.forEach(user => {
@@ -15,6 +32,7 @@ const Chats = ({ username, handleSelect }) => {
             currentUserID = user.id;
         }
     });
+    */
 
     useEffect(() => {
        const getChats = () => {

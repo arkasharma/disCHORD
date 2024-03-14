@@ -6,14 +6,22 @@ import Message from './Message.js';
 
 const Messages = ({ username, selectedUser }) => {
 
-    let currentUserID;
-    loginDb.validLogins.forEach(user => {
-        if (user.username === username) {
+    const [currentUserID, setCurrentUserID] = useState("");
 
-            // If the username matches, store the userID and exit the loop
-            currentUserID = user.id;
+    useEffect(() => {
+        let unSub;
+        unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
+                if (doc.exists()) {
+                    setCurrentUserID(doc.data().id);
+                }
+        })
+
+        return () => {
+            if (unSub) {
+                unSub();
+            }
         }
-    });
+    }, [username]);
 
     const combinedID = 
         currentUserID > selectedUser?.id

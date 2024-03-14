@@ -101,6 +101,24 @@
       "username": "moose5",
       "password": "1957b9981fc9cfa67abff7eb73045b55f99b9673f7637e138fd3f8c7a1313e94",
       "email": "asdf"
+    },
+    {
+      "id": "9615",
+      "username": "arka",
+      "password": "$2a$10$DGpq0YIOXvXTCrCQBa2rReb1l1WhCTHwbzqJWixH905d5g.0lmQ3C",
+      "email": "arka"
+    },
+    {
+      "id": "bf1d",
+      "username": "ark",
+      "password": "0cde7b186e42f60bff07d8c611cca20f4c47d2327e8ca2bd899503596120d1ce",
+      "email": "arka"
+    },
+    {
+      "id": "c096",
+      "username": "arkas",
+      "password": "0cde7b186e42f60bff07d8c611cca20f4c47d2327e8ca2bd899503596120d1ce",
+      "email": "arka"
     }
   ]
 }

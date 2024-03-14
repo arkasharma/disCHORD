@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { arrayUnion, doc, updateDoc, Timestamp, serverTimestamp } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { arrayUnion, updateDoc, Timestamp, serverTimestamp } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase.js';
 import loginDb from '../loginDb.json';
 import { v4 as uuid } from 'uuid';
@@ -7,6 +8,24 @@ import { v4 as uuid } from 'uuid';
 
 const Input = ({username, selectedUser}) => {
 
+    const [currentUserID, setCurrentUserID] = useState("");
+
+    useEffect(() => {
+        let unSub;
+        unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
+                if (doc.exists()) {
+                    setCurrentUserID(doc.data().id);
+                }
+        })
+
+        return () => {
+            if (unSub) {
+                unSub();
+            }
+        }
+    }, [username]);
+    
+    /*
     let currentUserID;
     loginDb.validLogins.forEach(user => {
         if (user.username === username) {
@@ -15,7 +34,7 @@ const Input = ({username, selectedUser}) => {
             currentUserID = user.id;
         }
     });
-
+*/
     const combinedID = 
         currentUserID > selectedUser?.id
         ? currentUserID + selectedUser?.id
