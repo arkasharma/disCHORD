@@ -48,7 +48,7 @@ Added to disCHORD using iFrame and has separate repo & README
 https://github.com/sananshi474/noteworthy.git
 
 
-##Contributors
+## Contributors
 
 <a href="https://github.com/mateusbehrend">Mateus Behrend</a> 
 
@@ -56,6 +56,6 @@ https://github.com/sananshi474/noteworthy.git
 
 <a href="https://github.com/ashtonjin">Ashton Jin</a>
 
-<a href="https://github.com/arkasharma">Sananshi Pidyar</a>
+<a href="https://github.com/sananshi474">Sananshi Pidyar</a>
 
 <a href="https://github.com/arkasharma">Arka Sharma</a>
