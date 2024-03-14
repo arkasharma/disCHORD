@@ -2,7 +2,7 @@
 
 ## About
 
-Our app, disCHORD, aims to connect people across the globe through the power of music. The app allows you to search an artist or title, links to Spotify for listening to music with friends, and offers a chat feature for texting while listening!
+Our app, disCHORD, aims to connect people across the globe through the power of music. The app allows you to search an artist or title, links to Spotify for listening to music with friends, and offers a chat feature for texting while listening! Additionally based on a chatgpt like search you can find matches based on keywords.
 
 Originally developed for UCLA's CS35L course
 
