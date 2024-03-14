@@ -8,6 +8,11 @@ import requests
 os.system("npm install")
 os.system("npm install json-server")
 
+directory = os.getcwd()
+directory_name = "loginInfo"
+if not os.path.exists(os.path.join(directory, directory_name)):
+    os.mkdir(directory_name)
+
 #init our local json file/server
 with open('loginInfo/loginDb.json', 'w') as f:
     f.write('{"validLogins": []}')
