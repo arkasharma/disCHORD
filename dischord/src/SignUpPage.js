@@ -71,6 +71,19 @@ const SignUpPage = () => {
       alert("Please enter a username");
       return;
     }
+    if (formData.password.length < 5) {
+      alert("Username must be at least 5 characters long");
+      return;
+    }
+    //check if the password contains atleast a letter and a number
+    if (
+      !formData.password.match(/[a-z]/g) ||
+      !formData.password.match(/[0-9]/g)
+    ) {
+      alert("Password must contain at least one letter and one number");
+      return;
+    }
+
     if (formData.password === "") {
       alert("Please enter a password");
       return;
