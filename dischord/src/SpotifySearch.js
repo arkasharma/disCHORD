@@ -5,9 +5,36 @@ import axios from "axios";
 import "./SpotifySearch.css";
 import pauseButton from "./images/pauseButton.png";
 import playButton from "./images/playButton.png";
+import linkButton from "./images/linkButton.png";
 
 
 // npm install dotenv axios
+
+const CopyLinkButton = ({ link }) => {  
+  const [notification, setNotification] = useState(null);
+  const [fade, setFade] = useState(false);
+
+  const copyToClipboard = async() => {
+    try {
+      await navigator.clipboard.writeText(link);
+      setNotification('Copied!');
+    } catch (err) {
+      setNotification('Failed to copy link to clipboard');
+    }
+    setFade(true);
+    setTimeout(() => { setNotification(null); setFade(false)}, 2000);
+  }
+
+  return (
+    <div className="link-and-noti">
+      <button className='spot-button2' onClick={copyToClipboard}>
+        <span className={`fade-text ${fade ? 'fade' : ''}`}>
+          <strong>{notification ? notification : 'Copy Link'}</strong>
+        </span>
+      </button>
+    </div>
+  );
+}
 
 const SearchBar = ({ artistName, setArtistName, trackName, setTrackName }) => {
   return (
@@ -92,6 +119,7 @@ const SpotifySearch = () => {
   const previewTrack = useRef(null);
   const [currentSongId, setCurrentSongId] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
 
 
   // get through spotify dev account
@@ -222,12 +250,15 @@ const SpotifySearch = () => {
           <div className="track-card" key={song.id} style={{ marginBottom: '20px' }}>
             {song.album.images.length > 0 && (
               <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
+                <img className="album-img" src={song.album.images[0].url} alt={`${song.name} album cover`} style={{ width: '85px', height: '85px', marginRight: '10px' }} />
               </a>
             )}     
             <div className="card-track-artist">
               <h2>{song.name}</h2>
               <p>{song.artists.map((artist) => artist.name).join(", ")}</p>
+              <p>
+                <CopyLinkButton link={song.external_urls.spotify}/>
+              </p>
             </div>
             <div className="play-button">
               {song.preview_url && (
