@@ -8,6 +8,8 @@ const Chats = ({ username, handleSelect }) => {
 
     useEffect(() => {
         let unSub;
+
+        // is username is valid, search usernames database to find the user's id
         if (username) {
         unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
                 if (doc.exists()) {

@@ -11,6 +11,8 @@ const Input = ({username, selectedUser}) => {
 
     useEffect(() => {
         let unSub;
+
+        // is username is valid, search usernames database to find the user's id
         if (username) {
         unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
                 if (doc.exists()) {
@@ -25,6 +27,7 @@ const Input = ({username, selectedUser}) => {
         }
     }, [username]);
   
+    // create combined id: concatenation of sender and receiver's id
     const combinedID = 
         currentUserID > selectedUser?.id
         ? currentUserID + selectedUser?.id
@@ -34,6 +37,9 @@ const Input = ({username, selectedUser}) => {
 
     const handleSend = async () => {
         if (combinedID && selectedUser != null) {
+
+            // chat is identified by the combined id
+            // update the chats database with new message
             await updateDoc(doc(db, "chats", combinedID), {
             messages: arrayUnion({
                 id: uuid(),
@@ -43,6 +49,7 @@ const Input = ({username, selectedUser}) => {
             }),
             });
 
+        // update userChats database (which stores the users a user is chatting with)
         await updateDoc(doc(db, "userChats", currentUserID), {
             [combinedID + ".lastMessage"]:{
                 text

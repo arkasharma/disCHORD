@@ -7,6 +7,8 @@ const Message = ({username, selectedUser, message}) => {
 
     useEffect(() => {
         let unSub;
+
+        // is username is valid, search usernames databse to find the user's id
         if (username) {
         unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
                 if (doc.exists()) {
@@ -23,6 +25,7 @@ const Message = ({username, selectedUser, message}) => {
     
     const ref = useRef()
 
+    // scroll if current chat is not in user's screen
     useEffect (() => {
         ref.current?.scrollIntoView({behavior:"smooth"})
         }, [message]);

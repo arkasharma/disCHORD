@@ -8,6 +8,8 @@ const Messages = ({ username, selectedUser }) => {
 
   useEffect(() => {
     let unSub;
+
+    // is username is valid, search usernames databse to find the user's id
     if (username) {
       unSub = onSnapshot(doc(db, "usernames", username), (doc) => {
         if (doc.exists()) {
@@ -31,6 +33,9 @@ const Messages = ({ username, selectedUser }) => {
 
   useEffect(() => {
     let unSub;
+
+    // if a chat is selected, find the chat associated with the two users (current and selected user)
+    // set messages to messages array fetched from database
     if (combinedID && selectedUser != null) {
       unSub = onSnapshot(doc(db, "chats", combinedID), (doc) => {
         doc.exists() && setMessages(doc.data().messages);
@@ -44,7 +49,6 @@ const Messages = ({ username, selectedUser }) => {
     };
   }, [combinedID, selectedUser]);
 
-  console.log(messages);
   return (
     <div className="messages">
       {messages.map((m) => (

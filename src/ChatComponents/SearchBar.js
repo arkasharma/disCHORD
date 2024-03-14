@@ -14,6 +14,8 @@ const SearchBar = (prop) => {
 
     useEffect(() => {
         let unSub;
+
+        // is username is valid, search usernames databse to find the user's id
         if (username) {
         unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
                 if (doc.exists()) {
