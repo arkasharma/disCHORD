@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
-import bcrypt from "bcryptjs";
+import CryptoJS from "crypto-js";
 
 const LoginPage = ({ username, setUsername, password, setPassword }) => {
   const history = useHistory();
   let loggedIn = false;
   const [isLoggedIn, setIsLoggedIn] = useState("init");
+
   const fetchData = () => {
     return fetch("http://localhost:8000/validLogins")
       .then((response) => {
@@ -44,7 +45,10 @@ const LoginPage = ({ username, setUsername, password, setPassword }) => {
         // Allows for multiple entries of the same username, but should work in either case
         const matchingUsernames = data.userEntries;
         for (let i = 0; i < matchingUsernames.length; i++) {
-          if (bcrypt.compareSync(password, matchingUsernames[i].password)) {
+          if (
+            CryptoJS.SHA256(password).toString() ===
+            matchingUsernames[i].password
+          ) {
             //set cookie so that user can be redirected back to the chat page if not logged in
             loggedIn = true;
             Cookies.set("loggedIn", loggedIn, { expires: 1 / 24, path: "/" });

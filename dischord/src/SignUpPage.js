@@ -1,6 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
+import { getApps, initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+// Initialize firebase
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+};
+
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0];
+}
+
+const db = getFirestore(app);
+let collectionData = [];
+
+// getDocs(collection(db, "usernames")).then((querySnapshot) => {
+//   // querySnapshot.forEach((doc) => {
+//   //   console.log(`${doc.id} => ${doc.data()}`);
+//   // });
+//   collectionData = querySnapshot.docs.map((doc) => doc.data());
+//   console.log(collectionData);
+// });
+
+// console.log(collectionData);
 
 //create function to hash the password
 function hashPassword(password) {
@@ -14,6 +46,18 @@ const SignUpPage = () => {
     password: "",
     email: "",
   });
+
+  //set up fetched data from firebase
+  const [collectionData, setCollectionData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "usernames"));
+      setCollectionData(querySnapshot.docs.map((doc) => doc.data()));
+    };
+    fetchData();
+  }, []);
+  console.log(collectionData);
 
   //init router hook to change navigation and direction
   const history = useHistory();
