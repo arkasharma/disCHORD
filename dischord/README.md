@@ -12,13 +12,13 @@ Contributors: Mateus Behrend, Kyle DeVeaux, Ashton Jin, Sananshi Pidyar, Arka Sh
 
 Here’s a brief list of disCHORD’s most notable features:
 
+Authenticated Login: Authenticate users for secure access to the app.
+
 Search Using Keyword: Users can search for an artist or track title, and the app will return recommendations
 
 Music: disCHORD includes a feature that links tracks to Spotify, so users can listen to the track there.
 
-Chat: Users can chat with one another and search for users by username.
-
-Authenticated Login: Authenticate users for secure access to the app.
+Chat: Users can search for users by username and chat with each other.
 
 iFrame: A fun feature where you can type in a song name, and the search will return similar songs and a confidence level.
 

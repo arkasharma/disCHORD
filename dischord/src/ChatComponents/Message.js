@@ -1,17 +1,26 @@
-import React, { useEffect, useRef } from 'react'
-import loginDb from '../loginDb.json'
+import React, { useEffect, useState, useRef } from 'react'
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase.js';
 
 const Message = ({username, selectedUser, message}) => {
+    const [currentUserID, setCurrentUserID] = useState("");
 
-    let currentUserID;
-    loginDb.validLogins.forEach(user => {
-        if (user.username === username) {
-
-            // If the username matches, store the userID and exit the loop
-            currentUserID = user.id;
+    useEffect(() => {
+        let unSub;
+        if (username) {
+        unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
+                if (doc.exists()) {
+                    setCurrentUserID(doc.data().id);
+                }
+        })
         }
-    });
-
+        return () => {
+            if (unSub) {
+                unSub();
+            }
+        }
+    }, [username]);
+    
     const ref = useRef()
 
     useEffect (() => {

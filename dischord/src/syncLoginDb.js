@@ -22,6 +22,12 @@ export async function syncLoginDb() {
             if (!userChatDocSnapshot.exists()) {
                 await setDoc(userChatDocRef, {});
             }
+
+            const usernamesDocRef = doc(db, "usernames", user.username);
+            const usernamesDocSnapshot = await getDoc(usernamesDocRef);
+            if (!usernamesDocSnapshot.exists()) {
+                await setDoc(usernamesDocRef, user);
+            }
         } 
         
         catch (error) {

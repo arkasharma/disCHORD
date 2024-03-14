@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase.js";
+import { syncLoginDb } from "./syncLoginDb.js";
 
 //create function to hash the password
 function hashPassword(password) {
@@ -15,33 +18,25 @@ const SignUpPage = () => {
     email: "",
   });
 
+  //set up fetched data from firebase
+  const [usernameData, setUsernameData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "usernames"));
+      setUsernameData(querySnapshot.docs.map((doc) => doc.data().username));
+    };
+    fetchData();
+  }, []);
+  console.log(usernameData);
+
   //init router hook to change navigation and direction
   const history = useHistory();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  //fetch the usernames from the database
-  const fetchUsernames = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/validLogins");
 
-      if (!response.ok) {
-        throw new Error("Bad network response unable to fetch data");
-      }
-
-      const jsonData = await response.json();
-
-      // return the usernames that match in the database
-      const userEntries = jsonData.filter(
-        (item) => item.username === formData.username
-      );
-      return { userEntries };
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return { error: error.message };
-    }
-  };
   // handle the submission of the form
   const handleSub = (e) => {
     const user = { ...formData };
@@ -58,36 +53,43 @@ const SignUpPage = () => {
       alert("Please enter a username");
       return;
     }
+    if (formData.password.length < 5) {
+      alert("Password must be at least 5 characters long");
+      return;
+    }
+    //check if the password contains atleast a letter and a number
+    if (
+      !formData.password.match(/[a-z]/g) ||
+      !formData.password.match(/[0-9]/g)
+    ) {
+      alert("Password must contain at least one letter and one number");
+      return;
+    }
+
     if (formData.password === "") {
       alert("Please enter a password");
       return;
     }
-    //make process await the return of the existing usernames
     //check if the username already exists
-    // if it does, alert the user and return
-    // if the username is not already taken then the array will be empty
-
-    // hash the password
-    user.password = hashPassword(user.password);
-
-    fetchUsernames().then((existingUsernames) => {
-      //check if the username already exists
-      // if it does, alert the user and return
-      // if the username is not already taken then the array will be empty
-      if (existingUsernames.userEntries.length > 0) {
-        alert("Username already exists, choose another username");
-        return;
-      } else {
-        //submit form data to JSON database
-        //IMPORTANT will need to change fetch address location
-        fetch("http://localhost:8000/validLogins", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(user),
-        }).then(() => history.push("/signedUp"));
-      }
-    });
+    //fetch usernames from database
+    if (usernameData.includes(formData.username)) {
+      alert("Username already exists");
+      return;
+    } else {
+      // hash the password
+      user.password = hashPassword(user.password);
+      //submit form data to JSON database
+      //IMPORTANT will need to change fetch address location
+      fetch("http://localhost:8000/validLogins", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      }).then(() => {
+        syncLoginDb();
+        history.push("/signedUp")});
+    }
   };
+
   return (
     <div id="hom">
       <h2 id="title">Sign Up for DisCHORD!</h2>

@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { collection, query, where, getDocs, getDoc } from "firebase/firestore"
-import { doc, setDoc, updateDoc } from "firebase/firestore"; 
+import { doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore"; 
 import { serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.js"
-import loginDb from "../loginDb.json";
 
 const SearchBar = (prop) => {
     const { username } = prop;
@@ -11,23 +10,34 @@ const SearchBar = (prop) => {
     const [user, setUser] = useState(null)
     const [err, setErr] = useState(false)
 
-    // Iterate through the validLogins array to find the user with the matching username
-    let currentUserID;
-    loginDb.validLogins.forEach(user => {
-        if (user.username === username) {
+    const [currentUserID, setCurrentUserID] = useState("");
 
-            // If the username matches, store the userID and exit the loop
-            currentUserID = user.id;
+    useEffect(() => {
+        let unSub;
+        if (username) {
+        unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
+                if (doc.exists()) {
+                    setCurrentUserID(doc.data().id);
+                }
+        })
+    }
+        return () => {
+            if (unSub) {
+                unSub();
+            }
         }
-    });
+    }, [username]);
     
     // Now userID contains the ID of the currentUser (the logged-in user)
 
     const handleSearch = async () => {
+        // send a query to firebase to see if entered username exists
         const q = query(
             collection(db, "users"), 
             where("username", "==", newUsername));
 
+        // if username exists, setUser to the username
+        // else, set error to true     
         try {
         const querySnapshot = await getDocs(q); 
         querySnapshot.forEach((doc) => {
@@ -40,12 +50,11 @@ const SearchBar = (prop) => {
     };
 
     const handleKey = e => {
+        // if user pressed "Enter", start search
         e.code === "Enter" && handleSearch();
     };
 
     const handleSelect = async () => {
-        // check whether the group exists by checking chats collection in firestore
-        // create new group if chat doesn't exist
         const combinedID = 
         currentUserID > user.id
         ? currentUserID + user.id
@@ -60,6 +69,8 @@ const SearchBar = (prop) => {
                 await setDoc(doc (db, "chats", combinedID), {messages:[]});
 
                 // create userChats (which stores a user and their latest message)
+                // data saved to order chats by timestamp
+                // updating userChat doc for currentUser
                 await updateDoc(doc(db, "userChats", currentUserID), {
                     [combinedID+".userInfo"]: {
                         id:user.id,
@@ -68,6 +79,7 @@ const SearchBar = (prop) => {
                     [combinedID+".date"]:serverTimestamp()
                 });
 
+                // updating userChat doc for selectedUser (receiver)
                 await updateDoc(doc(db, "userChats", user.id), {
                     [combinedID+".userInfo"]: {
                         id:currentUserID,

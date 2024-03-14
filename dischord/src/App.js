@@ -12,13 +12,13 @@ import { syncLoginDb } from "./syncLoginDb.js";
 
 //require dotenv for the environment variables
 //require("dotenv").config({ path: "../.env" });
-console.log(process.env.REACT_APP_SPOTIFY_API_KEY);
 
 function App() {
   // create stateVariables
   // value of the variables will update everytime a keystroke is entired into the box
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
 
   useEffect(() => {
     // Execute syncLoginDb when the component mounts
