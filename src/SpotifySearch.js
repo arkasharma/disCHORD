@@ -225,7 +225,7 @@ const SpotifySearch = () => {
     const searchSongs = async () => {
       if (!token || (!artistName.trim() && !trackName.trim()))
         return;
-      const { data } = await axios(`https://api.spotify.com/v1/search?q=${artistName} ${trackName}&type=track&limit=5`, {
+      const { data } = await axios(`https://api.spotify.com/v1/search?q=${artistName} ${trackName}&type=track&limit=10`, {
         headers: {
             'Authorization': `Bearer ${token}`
         },

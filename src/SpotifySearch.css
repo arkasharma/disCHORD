@@ -178,8 +178,6 @@
 .scroll-container {
     overflow-y: auto; /* Enables vertical scrolling */
     overflow-x: hidden; /* Disables horizontal scrolling */
-    min-height: 100vh;
-    max-height: 200vh; /* Sets the maximum height of the container */
     margin-top: -30px;
     padding: 10px; /* Adds space around the content */
     padding-top: 20px; /* Adds space around the content */
