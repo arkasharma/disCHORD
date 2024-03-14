@@ -49,4 +49,13 @@ https://github.com/sananshi474/noteworthy.git
 
 
 ##Contributors
-<a href="https://github.com/mateusbehrend">Mateus Behrend </a> Kyle DeVeaux, Ashton Jin, Sananshi Pidyar, Arka Sharma.
+
+<a href="https://github.com/mateusbehrend">Mateus Behrend</a> 
+
+<a href="https://github.com/CheenWeenus">Kyle DeVeaux</a>
+
+<a href="https://github.com/ashtonjin">Ashton Jin</a>
+
+<a href="https://github.com/arkasharma">Sananshi Pidyar</a>
+
+<a href="https://github.com/arkasharma">Arka Sharma</a>
