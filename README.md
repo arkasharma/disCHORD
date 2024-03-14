@@ -6,8 +6,6 @@ Our app, disCHORD, aims to connect people across the globe through the power of 
 
 Originally developed for UCLA's CS35L course
 
-Contributors: Mateus Behrend, Kyle DeVeaux, Ashton Jin, Sananshi Pidyar, Arka Sharma.
-
 ## Features
 
 Here’s a brief list of disCHORD’s most notable features:
@@ -48,3 +46,7 @@ Added to disCHORD using iFrame
 Separate repo and README for NoteWorthy 
 Added to disCHORD using iFrame and has separate repo & README 
 https://github.com/sananshi474/noteworthy.git
+
+
+##Contributors
+<a href="https://github.com/mateusbehrend">Mateus Behrend </a> Kyle DeVeaux, Ashton Jin, Sananshi Pidyar, Arka Sharma.
