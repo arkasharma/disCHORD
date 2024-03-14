@@ -1,58 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase.js';
-import Message from './Message.js';
+import React, { useState, useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase.js";
+import Message from "./Message.js";
 
 const Messages = ({ username, selectedUser }) => {
+  const [currentUserID, setCurrentUserID] = useState("");
 
-    const [currentUserID, setCurrentUserID] = useState("");
-
-    useEffect(() => {
-        let unSub;
-        if (username) {
-        unSub = onSnapshot(doc(db,"usernames", username), (doc)=> {
-                if (doc.exists()) {
-                    setCurrentUserID(doc.data().id);
-                }
-        })
+  useEffect(() => {
+    let unSub;
+    if (username) {
+      unSub = onSnapshot(doc(db, "usernames", username), (doc) => {
+        if (doc.exists()) {
+          setCurrentUserID(doc.data().id);
+        }
+      });
     }
-        return () => {
-            if (unSub) {
-                unSub();
-            }
-        }
-    }, [username]);
+    return () => {
+      if (unSub) {
+        unSub();
+      }
+    };
+  }, [username]);
 
-    const combinedID = 
-        currentUserID > selectedUser?.id
-        ? currentUserID + selectedUser?.id
-        : selectedUser?.id + currentUserID;
+  const combinedID =
+    currentUserID > selectedUser?.id
+      ? currentUserID + selectedUser?.id
+      : selectedUser?.id + currentUserID;
 
-    const [messages, setMessages] = useState([])
-    
-    useEffect(() => {
-        let unSub;
-        if (combinedID && selectedUser != null){ 
-            unSub = onSnapshot(doc(db,"chats", combinedID), (doc)=> {
-                doc.exists() && setMessages(doc.data().messages)
-            })
-       }
+  const [messages, setMessages] = useState([]);
 
-        return () => {
-            if (unSub) {
-                unSub();
-            }
-        }
-    },[combinedID, selectedUser])
+  useEffect(() => {
+    let unSub;
+    if (combinedID && selectedUser != null) {
+      unSub = onSnapshot(doc(db, "chats", combinedID), (doc) => {
+        doc.exists() && setMessages(doc.data().messages);
+      });
+    }
 
-    console.log(messages);
-    return (
-        <div className="messages">
-            {messages.map(m => (                
-                <Message username={username} selectedUser={selectedUser} message={m} key={m.id}/>
-            ))}
-        </div>
-    )
-}
+    return () => {
+      if (unSub) {
+        unSub();
+      }
+    };
+  }, [combinedID, selectedUser]);
 
-export default Messages
+  console.log(messages);
+  return (
+    <div className="messages">
+      {messages.map((m) => (
+        <Message
+          username={username}
+          selectedUser={selectedUser}
+          message={m}
+          key={m.id}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Messages;
