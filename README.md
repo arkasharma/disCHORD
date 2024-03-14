@@ -23,7 +23,6 @@ Chat: Users can search for users by username and chat with each other.
 iFrame: A fun feature where you can type in a song name, and the search will return similar songs and a confidence level.
 
 ## Installation
-TODO: Add API Key instructions here, along with Spotify Client ID (no keys in README) and general instructions on how to run the startup script. 
 ```
 # Clone the repository and enter it
 git clone https://github.com/arkasharma/disCHORD
