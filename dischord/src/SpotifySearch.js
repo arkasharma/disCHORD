@@ -245,7 +245,7 @@ const SpotifySearch = () => {
   }
 
   return (
-      <div class="main-container">
+      <div className="main-container">
           {isError ? <ErrorDisplay error={error} errorDes={errorDes} clientId={clientId} setClientId={setClientId} clientSecret={clientSecret} setClientSecret={setClientSecret} getAccessToken={getAccessToken}/> : <SearchDisplay artistName={artistName} setArtistName={setArtistName} trackName={trackName} setTrackName={setTrackName} SearchResults={SearchResults} />}
       </div>
   );
