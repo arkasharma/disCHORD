@@ -12,15 +12,11 @@ Contributors: Mateus Behrend, Kyle DeVeaux, Ashton Jin, Sananshi Pidyar, Arka Sh
 
 Here’s a brief list of disCHORD’s most notable features:
 
-Authenticated Login: Authenticate users for secure access to the app.
-
-Search Using Keyword: Users can search for an artist or track title, and the app will return recommendations
-
-Music: disCHORD includes a feature that links tracks to Spotify, so users can listen to the track there.
-
-Chat: Users can search for users by username and chat with each other.
-
-iFrame: A fun feature where you can type in a song name, and the search will return similar songs and a confidence level.
+Authenticated Login: Authenticate users for secure access to the app. Supports cross-device login.
+Search Using Keyword: Users can search for an artist or track title, and the app will return song matches. 
+Music: disCHORD includes a feature that based on search we link tracks to Spotify, so users can listen to the track there. This allows for users to play and chat simultaneously.
+Chat: Users can search for users by username and chat with each other. Each chat sets up its own chatroom that allows for realtime communication.
+Noteworthy (Song Recommendations) iFrame: A fun feature where you can type in a song name, and the search will return similar songs and a confidence level.
 
 ## Installation
 ```
@@ -28,16 +24,17 @@ iFrame: A fun feature where you can type in a song name, and the search will ret
 git clone https://github.com/arkasharma/disCHORD
 cd disCHORD
 
-# Other Option Download Source Code
-cd (file_downloaded)
-./startup_script.py
+# Other Option: Download Source Code
+cd disCHORD
 ```
 
 ## Running
 
 ```
-# Run the statrt up script
+# Run the start up script
 # Then prove the needed API keys for firebase and spotify search
+# Running the program requires python
+pip3 install python-requests
 ./startup_script.py
 ```
 
