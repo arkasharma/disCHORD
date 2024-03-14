@@ -10,17 +10,17 @@ Originally developed for UCLA's CS35L course
 
 Here’s a brief list of disCHORD’s most notable features:
 
-Authenticated Login: Authenticate users for secure access to the app. Supports cross-device login.
+<b>Authenticated Login:</b> Authenticate users for secure access to the app. Supports cross-device login.
 
-Main Page: Provides a multiview window that allows for an immersive user experience with all the following features on this page:
+<b>Main Page:</b> Provides a multiview window that allows for an immersive user experience with all the following features on this page:
 
-Search Using Keyword: Users can search for an artist or track title, and the app will return song matches. 
+<b>Search Using Keyword:</b> Users can search for an artist or track title, and the app will return song matches. 
 
-Music: disCHORD includes a feature that, based on a search, link tracks to Spotify so users can listen to the track. This allows for users to play and chat simultaneously.
+<b>Music:</b> disCHORD includes a feature that, based on a search, link tracks to Spotify so users can listen to the track. This allows for users to play and chat simultaneously.
 
-Chat: Users can search for users by username and chat with each other. Each chat sets up its own chatroom that allows for realtime communication.
+<b>Chat:</b> Users can search for users by username and chat with each other. Each chat sets up its own chatroom that allows for realtime communication.
 
-Noteworthy (Song Recommendations) iFrame: A fun feature where you can type in a prompt, and the search will return song recommendations based on that prompt with a confidence level.
+<b>Noteworthy (Song Recommendations) iFrame:</b> A fun feature where you can type in a prompt, and the search will return song recommendations based on that prompt with a confidence level.
 
 ## Installation
 ```
