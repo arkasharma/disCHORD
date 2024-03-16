@@ -159,7 +159,7 @@ const SpotifySearch = () => {
   const [errorDes, setErrorDes] = useState('');
 
   const [clientId, setClientId] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_ID);
-  const [clientSecret, setClientSecret] = useState("");
+  const [clientSecret, setClientSecret] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET);
 
   //process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 
