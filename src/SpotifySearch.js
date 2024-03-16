@@ -98,8 +98,8 @@ const SearchDisplay = ({ artistName, setArtistName, trackName, setTrackName, Sea
 }
 
 const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, setClientSecret}) => {
-  const [clientIdInput, setClientIdInput] = useState(clientId);
-  const [clientSecretInput, setClientSecretInput] = useState(clientSecret);
+  const [clientIdInput, setClientIdInput] = useState("");
+  const [clientSecretInput, setClientSecretInput] = useState("");
 
   const handleClientIdChange = (event) => {
     setClientIdInput(event.target.value);
@@ -116,8 +116,14 @@ const ErrorDisplay = ({ error, errorDes, clientId, setClientId, clientSecret, se
 
   return (
     <div className="error-card">
-      <div className="err-top-txt"> Please enter a valid Client ID and Client Secret </div>
-      <div><strong>Error: </strong>{error}</div>
+      <div className="err-txt-top"><strong>Oops!</strong></div>
+      <div className="err-txt-content">
+        Something went wrong while trying to access the Spotify API. Contact developers to resolve this issue. Enter your own API keys if you still want to use this feature.
+      </div>
+      <div className="err-txt-content">
+        <a href="https://developer.spotify.com/documentation/web-api/tutorials/getting-started" target="_blank" rel="noopener noreferrer"> Get your own Spotify API keys</a>
+      </div>
+      <div className="err-txt-content"><strong>Error: </strong>{error}</div>
       <div className="err-txt-bot" ><strong>Error Description: </strong>{errorDes}</div>
       <div>        
         <div><strong>Client ID</strong></div>
@@ -153,7 +159,9 @@ const SpotifySearch = () => {
   const [errorDes, setErrorDes] = useState('');
 
   const [clientId, setClientId] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_ID);
-  const [clientSecret, setClientSecret] = useState(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET);
+  const [clientSecret, setClientSecret] = useState("");
+
+  //process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 
   const previewTrack = useRef(null);
   const [currentSongId, setCurrentSongId] = useState(null);

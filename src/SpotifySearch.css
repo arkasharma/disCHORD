@@ -237,12 +237,22 @@
     margin-top: 10px;
     border-radius: 15px;
 
-    .err-top-txt {
+    .err-txt-top {
         padding-top: 15px;
         padding-bottom: 10px;
     }
-
+    .err-txt-content {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .err-txt-content-link {
+        font-size: 14px;
+        margin-bottom: 15px;
+        color: #1ED760;
+        text-decoration: none;
+    }
     .err-txt-bot {
+        font-size: 14px;
         margin-bottom: 15px;
     }
 
